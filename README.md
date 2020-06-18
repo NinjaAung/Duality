@@ -40,7 +40,7 @@ Unity game focused on the concept of duality
       <br/>
     </td>
     <td align="center"><a href="https://github.com/dianeet">
-      <img src="https://avatars3.githubusercontent.com/u/40476306?s=460&v=4" width="75px;" alt="Diane Trinh"/>
+      <img src="https://avatars3.githubusercontent.com/u/66858440?s=460&v=4" width="75px;" alt="Diane Trinh"/>
       <br />
       <sub>
         <b>Diane Trinh</b>
