@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualityES;
 
-public enum CausesOfDeath
-{
-    Deadzones,
-    Hunger,
-    Starvation,
-    Fishnets,
-    Eaten,
-    Acidification
-}
 
 public class UpdatePlayerUI : DualityES.Event
 {
@@ -24,7 +15,7 @@ public class OnHealth : DualityES.Event
 }
 public class PlayerDie : DualityES.Event
 {
-    public CausesOfDeath causeOfDeath;
+    
 }
 public class BeginRitualToEnterHabitat : DualityES.Event
 {
@@ -71,23 +62,11 @@ public class Player : MonoBehaviour
         EventSystem.instance.RemoveListener<PlayerDie>(Die);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        DeathCheck();
-        
-    }
-
-    //Is called multiple time per frame, use for physics
-    void FixedUpdate()
-    {
-
-    }
     void KeyboardInput(KeyboardPressed keyboardPressedData)
     {
         current_speed = 0.0f;
 
+        current_speed = keyboardPressedData.horizontal * side_force;
     }
     public void Die(PlayerDie playerDie)
     {
@@ -102,6 +81,19 @@ public class Player : MonoBehaviour
     void DeathCheck() {
 
     }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        DeathCheck();
+        
+    }
 
+    //Is called multiple time per frame, use for physics
+    void FixedUpdate()
+    {
+        rb.AddForce(new Vector2(current_speed * Time.deltaTime,0));
+        
+    }
 
 }
