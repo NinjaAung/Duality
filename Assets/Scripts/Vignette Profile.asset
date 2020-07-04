@@ -17,17 +17,17 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   focusDistance:
-    overrideState: 0
+    overrideState: 1
     value: 10
   aperture:
-    overrideState: 0
-    value: 5.6
+    overrideState: 1
+    value: 32
   focalLength:
-    overrideState: 0
-    value: 50
+    overrideState: 1
+    value: 205
   kernelSize:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,16 +64,16 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 1}
+    value: {r: 0.13207549, g: 0.1277145, b: 0.1277145, a: 0.34901962}
   center:
     overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0
+    value: 1
   smoothness:
     overrideState: 1
-    value: 1
+    value: 0.666
   roundness:
     overrideState: 1
     value: 0.939
