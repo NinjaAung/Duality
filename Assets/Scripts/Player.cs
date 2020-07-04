@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     private bool isPauseOn = false;
 
     private float current_speed;
-    private float current_jump;
 
     private float distancetoGround = 0.0f;
 
@@ -71,13 +70,8 @@ public class Player : MonoBehaviour
     void KeyboardInput(KeyboardPressed keyboardPressedData)
     {
         current_speed = 0.0f;
-        current_jump = 0.0f;
 
         current_speed = keyboardPressedData.horizontal * side_force;
-        if ( keyboardPressedData.vertical > 0) 
-        {
-            current_jump = jump_force;
-        }
 
     }
 
@@ -107,8 +101,11 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         bool isGrounded = IsGrounded();
-        rb.AddForce(new Vector2(current_speed * Time.deltaTime,0));
-        rb.AddForce(new Vector2(0,current_jump * Time.deltaTime));        
+        rb.AddForce(Vector2.right * current_speed * Time.deltaTime);
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            rb.AddForce(Vector2.up * jump_force * Time.deltaTime, ForceMode2D.Impulse);
+        }     
     }
 
 }
