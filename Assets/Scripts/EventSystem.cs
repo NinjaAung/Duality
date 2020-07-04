@@ -68,7 +68,6 @@ namespace DualityES {
 
         public void RemoveListener<T>(EventDelegate<T> del) where T : Event //Removes Delegates for the Delegate Dictionary
         {
-            Debug.Log("RemoveListener Works/ is called");
             EventDelegate internalDelegate; // this an Event Delegate
             if (delegateLookup.TryGetValue(del, out internalDelegate))// looking for internal Delegate. Sets the local variable internalDelegate to the one passed in
             {
