@@ -6,9 +6,9 @@ using DualityES;
 
 public class UpdatePlayerUI : DualityES.Event
 {
-    public float healhpoints;
-    public float hungerpoints;
+
 }
+
 public class OnHealth : DualityES.Event
 {
     public float deltaHealthAmt;
@@ -16,14 +16,6 @@ public class OnHealth : DualityES.Event
 public class PlayerDie : DualityES.Event
 {
     
-}
-public class BeginRitualToEnterHabitat : DualityES.Event
-{
-    public bool onEnter;
-}
-public class PlayerPosition : DualityES.Event
-{
-    public Vector3 position;
 }
 
 public class Player : MonoBehaviour
@@ -36,13 +28,20 @@ public class Player : MonoBehaviour
     private bool isInControl = true;
     private bool isPauseOn = false;
 
-    [Header("Player Settings"), Space(2)]
-    public Rigidbody2D rb;
+    private float current_speed;
+    private float current_jump;
 
+    private float distancetoGround = 0.0f;
+
+
+    private int jump_count = 0;
+
+    [Header("Player Settings"), Space(2)]
+    private Rigidbody2D rb;
     public float jump_force = 0.0f;
     public float side_force = 0.0f;
 
-    private float current_speed;
+
 
 
     [Header("Gameplay Stats"), Space(2)]
@@ -52,6 +51,7 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
         EventSystem.instance.AddListener<KeyboardPressed>(KeyboardInput);
         EventSystem.instance.AddListener<PlayerDie>(Die);
 
@@ -62,12 +62,26 @@ public class Player : MonoBehaviour
         EventSystem.instance.RemoveListener<PlayerDie>(Die);
 
     }
+
+    public bool IsGrounded()
+    {
+        return Physics2D.Raycast(transform.position,Vector2.down);
+    }
+
     void KeyboardInput(KeyboardPressed keyboardPressedData)
     {
         current_speed = 0.0f;
+        current_jump = 0.0f;
 
         current_speed = keyboardPressedData.horizontal * side_force;
+        if ( keyboardPressedData.vertical > 0) 
+        {
+            current_jump = jump_force;
+        }
+
     }
+
+
     public void Die(PlayerDie playerDie)
     {
         //isInControl = false;
@@ -92,8 +106,9 @@ public class Player : MonoBehaviour
     //Is called multiple time per frame, use for physics
     void FixedUpdate()
     {
+        bool isGrounded = IsGrounded();
         rb.AddForce(new Vector2(current_speed * Time.deltaTime,0));
-        
+        rb.AddForce(new Vector2(0,current_jump * Time.deltaTime));        
     }
 
 }
