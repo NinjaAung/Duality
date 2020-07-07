@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: Ambient Loop Spooky Wavering
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values: []
+  m_eventsMix: 0
+  m_events: []
+  m_clips:
+  - {fileID: 8300000, guid: df1b69906a7f2644597afa72df1748e1, type: 3}
+  m_volume: 0.5
+  m_playbackSpeed: 1
+  m_randomizeOrder: 0
+  m_crossFade: 0
+  m_trackFadeTime: 0
+  m_volumeFadeTime: 0
+  m_playbackSpeedFadeTime: 0
+  m_delayChance: 100
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 0}
+  m_randomVolume: 0
+  m_minMaxVolume: {x: 0, y: 1}
+  m_modifiers: []
+  m_outputType: 0
+  m_outputPrefab: {fileID: 0}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 0}
+  m_outputVerticalAngle: {x: -180, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_syncGroup: 
+  m_syncType: 16
+  m_eventsWhilePlaying: []

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: SFX Random Spooky
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0.8
+    m_max: 1
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 0
+  m_eventsMix: 0
+  m_events: []
+  m_clips:
+  - {fileID: 8300000, guid: 8ef825a31f943e6408c5c99f3ce33013, type: 3}
+  - {fileID: 8300000, guid: 6414a31e7b720b04aa41c9679edba435, type: 3}
+  - {fileID: 8300000, guid: eb5157eca9b2bd44999d6ee8a8a5f49b, type: 3}
+  - {fileID: 8300000, guid: 75b8f6c3d8af97540be9b339dd6881c6, type: 3}
+  - {fileID: 8300000, guid: 15ac2b38c68298e4188fad1f8f1621d5, type: 3}
+  m_volume: 0.9
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 0
+  m_trackFadeTime: 2.5
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 100
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 3, y: 6}
+  m_randomVolume: 1
+  m_minMaxVolume: {x: 0.8, y: 1}
+  m_modifiers: []
+  m_outputType: 2
+  m_outputPrefab: {fileID: 1298190303267636, guid: 49d83de6564f71d4698689bbf8ed2669,
+    type: 2}
+  m_outputDirect: 0
+  m_outputDistance: {x: 1, y: 5}
+  m_outputVerticalAngle: {x: 0, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 0
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []

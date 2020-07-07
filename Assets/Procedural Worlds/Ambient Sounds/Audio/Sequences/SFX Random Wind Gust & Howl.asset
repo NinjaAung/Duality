@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: SFX Random Wind Gust & Howl
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0.8
+    m_max: 1
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 0
+  m_eventsMix: 0
+  m_events: []
+  m_clips:
+  - {fileID: 8300000, guid: 960e873c9c714d349830c22e725f312e, type: 3}
+  - {fileID: 8300000, guid: bc461d76a402f414689a87b4718c9924, type: 3}
+  - {fileID: 8300000, guid: 86ac02279e90ee847a725db21f696268, type: 3}
+  m_volume: 0.8
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 2
+  m_trackFadeTime: 2.5
+  m_volumeFadeTime: 2
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 100
+  m_delayFadeTime: 2
+  m_minMaxDelay: {x: 5, y: 10}
+  m_randomVolume: 1
+  m_minMaxVolume: {x: 0.4, y: 0.6}
+  m_modifiers: []
+  m_outputType: 2
+  m_outputPrefab: {fileID: 1298190303267636, guid: 49d83de6564f71d4698689bbf8ed2669,
+    type: 2}
+  m_outputDirect: 0
+  m_outputDistance: {x: 1, y: 5}
+  m_outputVerticalAngle: {x: 0, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 1
+  m_outputFollowRotation: 1
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []

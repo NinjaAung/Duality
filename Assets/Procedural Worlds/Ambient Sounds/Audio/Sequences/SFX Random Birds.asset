@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: SFX Random Birds
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0
+    m_max: 0.5
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 0
+  m_eventsMix: 0
+  m_events: []
+  m_clips:
+  - {fileID: 8300000, guid: ce068ba47b414c94aaa071aafd6d692e, type: 3}
+  - {fileID: 8300000, guid: e3c28c36fb747b2429dc75d5d62918e3, type: 3}
+  - {fileID: 8300000, guid: 223d5b77c8e1f8d4fbef2d5405f05610, type: 3}
+  - {fileID: 8300000, guid: 5809ee83441b1c045902d3ef334fd957, type: 3}
+  - {fileID: 8300000, guid: 67ccf13d54b65374181fd0643ad68d77, type: 3}
+  - {fileID: 8300000, guid: b639baaf870af994cbeda9e946e298a5, type: 3}
+  m_volume: 1
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 0
+  m_trackFadeTime: 2.5
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 75
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 2}
+  m_randomVolume: 0
+  m_minMaxVolume: {x: 1, y: 1}
+  m_modifiers: []
+  m_outputType: 2
+  m_outputPrefab: {fileID: 1298190303267636, guid: e445a510da371ca4eb145221286a7347,
+    type: 2}
+  m_outputDirect: 0
+  m_outputDistance: {x: 50, y: 100}
+  m_outputVerticalAngle: {x: 0, y: 0}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 0
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []

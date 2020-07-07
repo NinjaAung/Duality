@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: Cricket Loop
+  m_EditorClassIdentifier: 
+  m_requirements: 2
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0.4
+    m_max: 0.7
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 0
+  m_eventsMix: 0
+  m_events: []
+  m_clipData:
+  - m_clip: {fileID: 8300000, guid: 08a427b416a9c6e44a8184b18f03ea23, type: 3}
+    m_volume: 1
+  m_clips: []
+  m_volume: 0.75
+  m_playbackSpeed: 1
+  m_randomizeOrder: 0
+  m_crossFade: 1
+  m_trackFadeTime: 1
+  m_volumeFadeTime: 2
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 0
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 0}
+  m_randomVolume: 1
+  m_minMaxVolume: {x: 0.4, y: 0.9}
+  m_randomPlaybackSpeed: 0
+  m_minMaxPlaybackSpeed: {x: 0, y: 1}
+  m_modifiers: []
+  m_outputType: 0
+  m_outputPrefab: {fileID: 0}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 8}
+  m_outputVerticalAngle: {x: 0, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 1
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []
+  m_OnPlayClip:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AmbientSounds.Sequence+PlayEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_OnStopClip:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AmbientSounds.Sequence+PlayEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

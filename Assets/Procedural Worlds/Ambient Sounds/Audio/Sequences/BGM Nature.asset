@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: BGM Nature
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0
+    m_max: 0.5
+    m_minFalloff: 0
+    m_maxFalloff: 0.2
+    m_invert: 0
+  m_eventsMix: 2
+  m_events:
+  - Combat
+  m_clips:
+  - {fileID: 8300000, guid: be625333d762b6641bfccf09ce8b6b40, type: 3}
+  - {fileID: 8300000, guid: d65c0c0d2c1cccc479b76ed942c632e4, type: 3}
+  - {fileID: 8300000, guid: 38dfd3b73cef47f488776d60386e8917, type: 3}
+  - {fileID: 8300000, guid: 6ebf49c6b152c8244907359ed73c76f8, type: 3}
+  m_volume: 1
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 3
+  m_trackFadeTime: 5
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 100
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 0}
+  m_randomVolume: 0
+  m_minMaxVolume: {x: 0, y: 1}
+  m_modifiers: []
+  m_outputType: 0
+  m_outputPrefab: {fileID: 0}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 0}
+  m_outputVerticalAngle: {x: -180, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []

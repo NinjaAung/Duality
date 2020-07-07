@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ac88ce2dfd9634692496c0da1bff09, type: 3}
+  m_Name: Gazebo Exchange Modifier
+  m_EditorClassIdentifier: 
+  m_requirements: 3
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0
+    m_max: 0.62435305
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 1
+  m_eventsMix: 0
+  m_events:
+  - GazeboExchange
+  m_modVolume: 0
+  m_volume: 1
+  m_modPlaybackSpeed: 0
+  m_playbackSpeed: 1
+  m_modRandomizePlaybackSpeed: 0
+  m_randomizePlaybackSpeed: 0
+  m_modMinMaxPlaybackSpeed: 0
+  m_minMaxPlaybackSpeed: {x: 0, y: 1}
+  m_modClips: 1
+  m_modClipsType: 0
+  m_clipData:
+  - m_clip: {fileID: 8300000, guid: 791ccf14971f35f4e9ece06aa70d3577, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 82bd9d7cbfd72584db8551548fc7f3c3, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 182dee745dce43d4ea77262e30769bdb, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: c8bbdc0540e555f4e9334266fcdeffa5, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 652a8d7338dc2b24a923c6ef262321f2, type: 3}
+    m_volume: 1
+  m_clips: []
+  m_modDelayChance: 0
+  m_delayChance: 100
+  m_modDelay: 0
+  m_minMaxDelay: {x: 1, y: 2}
+  m_modRandomizeVolume: 0
+  m_randomizeVolume: 1
+  m_modMinMaxVolume: 0
+  m_minMaxVolume: {x: 1, y: 1}

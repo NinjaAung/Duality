@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: SFX Random Crickets
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values:
+  - m_name: Time of Day
+    m_min: 0.4
+    m_max: 0.7
+    m_minFalloff: 0.1
+    m_maxFalloff: 0.1
+    m_invert: 0
+  m_eventsMix: 0
+  m_events: []
+  m_clips:
+  - {fileID: 8300000, guid: 19d80d1c21bfce246a9d6fc7655277ef, type: 3}
+  - {fileID: 8300000, guid: b5535000ab4332747b85f05aa8e90afe, type: 3}
+  - {fileID: 8300000, guid: f6410ce01de95464a9d3e265ddbad85f, type: 3}
+  - {fileID: 8300000, guid: 75a605597f3862243bf5bd5ec4b6b57b, type: 3}
+  - {fileID: 8300000, guid: bee080370043f8144a2f802ba0c04393, type: 3}
+  - {fileID: 8300000, guid: 7537b2de82b69624cb58e3fdc5c08c21, type: 3}
+  - {fileID: 8300000, guid: 1a7ddbc8271fcb94a97e5e739f92a854, type: 3}
+  - {fileID: 8300000, guid: 40269fae2018bea4084221f7b1392271, type: 3}
+  m_volume: 1
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 0
+  m_trackFadeTime: 2.5
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 75
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 1}
+  m_randomVolume: 1
+  m_minMaxVolume: {x: 0.12982982, y: 1}
+  m_modifiers: []
+  m_outputType: 2
+  m_outputPrefab: {fileID: 1298190303267636, guid: e445a510da371ca4eb145221286a7347,
+    type: 2}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 1}
+  m_outputVerticalAngle: {x: 0, y: 0}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 0
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []

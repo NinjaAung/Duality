@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: Town BGM
+  m_EditorClassIdentifier: 
+  m_requirements: 0
+  m_valuesMix: 0
+  m_values: []
+  m_eventsMix: 0
+  m_events: []
+  m_clipData:
+  - m_clip: {fileID: 8300000, guid: cc1854d9ddbf7e14fafc341496b641e3, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: abf4f9222fc309a4abfd327deb92b6bd, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 23b118507b6dd0241806ae8ed8f00f3f, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: cf6fa9cfd7d3f5f46b76be9628b2c2e0, type: 3}
+    m_volume: 1
+  m_clips: []
+  m_volume: 0.8
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 2
+  m_trackFadeTime: 2
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 2
+  m_delayChance: 100
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 1, y: 3}
+  m_randomVolume: 0
+  m_minMaxVolume: {x: 0, y: 1}
+  m_randomPlaybackSpeed: 0
+  m_minMaxPlaybackSpeed: {x: 0, y: 1}
+  m_modifiers:
+  - {fileID: 11400000, guid: 1df0004dacb7c774eb7300efafa34bf7, type: 2}
+  - {fileID: 11400000, guid: 4f018ca0136748c48b5b1a857604e94c, type: 2}
+  - {fileID: 11400000, guid: 90d62326dace8284fb3e16f799879e55, type: 2}
+  m_outputType: 0
+  m_outputPrefab: {fileID: 0}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 0}
+  m_outputVerticalAngle: {x: -180, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 1
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 0
+  m_eventsWhilePlaying: []
+  m_OnPlayClip:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AmbientSounds.Sequence+PlayEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_OnStopClip:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AmbientSounds.Sequence+PlayEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
