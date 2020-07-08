@@ -51,13 +51,11 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        EventSystem.instance.AddListener<KeyboardPressed>(KeyboardInput);
         EventSystem.instance.AddListener<PlayerDie>(Die);
 
     }
     private void OnDisable()
     {
-        EventSystem.instance.RemoveListener<KeyboardPressed>(KeyboardInput);
         EventSystem.instance.RemoveListener<PlayerDie>(Die);
 
     }
@@ -65,14 +63,6 @@ public class Player : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.Raycast(transform.position,Vector2.down);
-    }
-
-    void KeyboardInput(KeyboardPressed keyboardPressedData)
-    {
-        current_speed = 0.0f;
-
-        current_speed = keyboardPressedData.horizontal * side_force;
-
     }
 
 

@@ -8,14 +8,6 @@ public class CheckForRestart : DualityES.Event
 
 }
 
-public class KeyboardPressed : DualityES.Event
-{
-    public float horizontal = Input.GetAxis("Horizontal");
-    public float vertical = Input.GetAxis("Vertical");
-}
-
-
-
 public class InputManager : MonoBehaviour
 {
 
@@ -53,11 +45,6 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        EventSystem.instance.RaiseEvent(new KeyboardPressed
-        {
-            horizontal = Input.GetAxis("Horizontal"),
-            vertical = Input.GetAxis("Vertical")
-        });
 
 
         #region Pause
