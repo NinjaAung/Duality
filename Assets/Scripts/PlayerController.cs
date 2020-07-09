@@ -1,21 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualityES;
 
 public class PlayerController : MonoBehaviour
-{
+{	
+	[Header("Player Controls"), Space(2)]
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, 1), SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f), SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
+
+	[Header("Collider Checks"), Space(2)]
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
-	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
+	private Collider2D m_CrouchDisableCollider = null;							// A collider that will be disabled when crouching
+
+	[Header("Grab & Pull"), Space(2)]
+	[Range(0, 1), SerializeField] private float m_Distance = 1f;
+	[SerializeField] private LayerMask m_ObstacleMask; 
+	GameObject m_Obstacle;
+
+
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
@@ -38,6 +50,24 @@ public class PlayerController : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 				m_Grounded = true;
 		}
+	}
+
+	public void ObstacleGrab(bool grabed)
+	{
+		Physics2D.queriesStartInColliders = false;
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
+
+		if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
+			m_Obstacle = hit.collider.gameObject;
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+			m_Obstacle.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 1f;
+		} else if (!grabed)
+		{
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100f;
+		}
+
 	}
 
 

@@ -112,24 +112,24 @@ public class GameManager: MonoBehaviour
         
     }
 
-    void JudgmentOverload()
-    {
-        if(m_Judgement >= m_JudgementOverloadValue)
-        {
-            EventSystem.instance.RaiseEvent( new PlayerDie { });
-            Debug.Log("Filler until program the Player death code");
-        }
-    }
+    // void JudgmentOverload()
+    // {
+    //     if(m_Judgement >= m_JudgementOverloadValue)
+    //     {
+    //         EventSystem.instance.RaiseEvent( new PlayerDie { });
+    //         Debug.Log("Filler until program the Player death code");
+    //     }
+    // }
     // When programming the inverse correlation between judgement and player speed
     //Add a <Judgement> listener in the Plyaer code to get the Judgement value and then
     //find a way to code an inverse relationship between the speed and the judgement
-    void OnPlayerDeath(PlayerDie player)
-    {
-        //Either load the "save" feature or death UI play or directly take character to credit scene
-        //Save
-        //Or Death UI
-        //Or Change it to the credit scene
-    }
+    // void OnPlayerDeath(PlayerDie player)
+    // {
+    //     //Either load the "save" feature or death UI play or directly take character to credit scene
+    //     //Save
+    //     //Or Death UI
+    //     //Or Change it to the credit scene
+    // }
 
 
     #region World Switching Functions
