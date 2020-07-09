@@ -5,7 +5,7 @@ using DualityES;
 
 public class Judgment: DualityES.Event
 {
-    public float JudgmentScore = 0.0f;
+    public float JudgmentScore;
 }
 
 public enum Worlds
@@ -17,6 +17,21 @@ public enum Worlds
 /*
     Place this ontop of the Input Manager
 */
+
+/*
+* 
+* Place this code in the Input Manager to have the world switching working. 
+
+Place this in the Unity Update Function in the Input Manager 
+ if (Input.GetKeyDown(KeyCode.H))
+{
+EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
+
+};
+
+
+* */
+
 public class WorldSwitchButton : DualityES.Event
 {
 
@@ -44,16 +59,24 @@ public class WorldSwitching : DualityES.Event
 
 public class GameManager: MonoBehaviour
 {
-    //The World 1 is assigned in the world
+    #region World Switching Variables 
+    //The Worlds are assigned in the inspcetor
     public World world1Push;
     public World world2Pull;
 
     public Worlds currentWorld;
 
+    #endregion
     private void Awake()
     {
         currentWorld = Worlds.Push;
+        //Setting the World 1 to be default on
         UpdatingWorldObjects(true);
+        //Null Checker
+        if(world1Push == null||world2Pull == null)
+        {
+            Debug.LogError("Unassgined World Variable");
+        }
 
         //Listening to the Input Manager
         //On World Switch starts the other event that alerts the other listeners
@@ -69,6 +92,8 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
     }
 
+
+    #region World Switching Functions
     //Receiving that the Input that the world is going to change it "tells" the rest of the scripts
     //Was done this way so the Input doesn't have to tell determine which world the player currently is in
     //Depending on which world the current player is in the world changes accordingly
@@ -121,18 +146,8 @@ public class GameManager: MonoBehaviour
         world2Pull.SetWorldStatus(opposite);
     }
 
-    /*
-     * 
-     * Place this code in the Input Manager to have it working. 
 
-     Place this in the Unity Update in the Input Manager 
-     
-    if (Input.GetKeyDown(KeyCode.H))
-    {
-            EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
-            Debug.Log("Pressed the key :" + KeyCode.H);
-        };
+#endregion
 
-     * */
 
 }
