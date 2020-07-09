@@ -5,7 +5,7 @@ using DualityES;
 
 public class Judgment: DualityES.Event
 {
-    public float JudgmentScore = 0.0f;
+    public float JudgmentScore;
 }
 
 public enum Worlds
@@ -17,10 +17,21 @@ public enum Worlds
 /*
     Place this ontop of the Input Manager
 */
-public class WorldSwitchButton : DualityES.Event
-{
 
-}
+/*
+* 
+* Place this code in the Input Manager to have the world switching working. 
+
+Place this in the Unity Update Function in the Input Manager 
+ if (Input.GetKeyDown(KeyCode.H))
+{
+EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
+
+};
+
+
+* */
+
 
 
 //A container class for all the GameObjects
@@ -44,16 +55,38 @@ public class WorldSwitching : DualityES.Event
 
 public class GameManager: MonoBehaviour
 {
-    //The World 1 is assigned in the world
+    #region World Switching Variables 
+    //The Worlds are assigned in the inspcetor
     public World world1Push;
     public World world2Pull;
 
     public Worlds currentWorld;
+    
+    [Range(1,100), Tooltip("In terms of seconds")]
+    public float m_WorldSwitchCooldownTimer;
+
+    private float currTimer;
+    private bool cooldownPassed = true;
+
+    #endregion
+
+    [Range(0,100)]
+    public float m_Judgement;
+    [Range(0.01f,1f),SerializeField]
+    private float m_IncreaseRate = 0.01f;
+    [Range(70, 100), SerializeField]
+    private float m_JudgementOverloadValue = 70.0f;
 
     private void Awake()
     {
         currentWorld = Worlds.Push;
+        //Setting the World 1 to be default on
         UpdatingWorldObjects(true);
+        //Null Checker
+        if(world1Push == null||world2Pull == null)
+        {
+            Debug.LogError("Unassgined World Variable");
+        }
 
         //Listening to the Input Manager
         //On World Switch starts the other event that alerts the other listeners
@@ -69,24 +102,77 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
     }
 
+    private void Update()
+    {
+        //Judgement Variable Update
+        m_Judgement += m_IncreaseRate * Time.deltaTime;
+        EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement});
+
+        WSCooldownTimer();
+        
+    }
+
+    void JudgmentOverload()
+    {
+        if(m_Judgement >= m_JudgementOverloadValue)
+        {
+            EventSystem.instance.RaiseEvent( new PlayerDie { });
+            Debug.Log("Filler until program the Player death code");
+        }
+    }
+    // When programming the inverse correlation between judgement and player speed
+    //Add a <Judgement> listener in the Plyaer code to get the Judgement value and then
+    //find a way to code an inverse relationship between the speed and the judgement
+    void OnPlayerDeath(PlayerDie player)
+    {
+        //Either load the "save" feature or death UI play or directly take character to credit scene
+        //Save
+        //Or Death UI
+        //Or Change it to the credit scene
+    }
+
+
+    #region World Switching Functions
+    void WSCooldownTimer()
+    {
+        if (cooldownPassed == false)
+        {
+            if (currTimer < m_WorldSwitchCooldownTimer)
+            {
+                currTimer += Time.deltaTime;
+            }
+            else
+            {
+                cooldownPassed = true;
+                currTimer = 0;
+
+            }
+        }
+    }
+
     //Receiving that the Input that the world is going to change it "tells" the rest of the scripts
     //Was done this way so the Input doesn't have to tell determine which world the player currently is in
     //Depending on which world the current player is in the world changes accordingly
     private void OnWorldSwitch(WorldSwitchButton button)
     {
-        switch(currentWorld)
+        if (cooldownPassed)
         {
-            case Worlds.Push:
-                EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
-                break;
-            case Worlds.Pull:
-                EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
-                break;
-            case Worlds.Peace:
-                break;
-            default:
-                break;
+            cooldownPassed = false;
+            switch (currentWorld)
+            {
+                case Worlds.Push:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
+                    break;
+                case Worlds.Pull:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
+                    break;
+                case Worlds.Peace:
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 
     //Updating which world the player is in.
@@ -121,18 +207,8 @@ public class GameManager: MonoBehaviour
         world2Pull.SetWorldStatus(opposite);
     }
 
-    /*
-     * 
-     * Place this code in the Input Manager to have it working. 
 
-     Place this in the Unity Update in the Input Manager 
-     
-    if (Input.GetKeyDown(KeyCode.H))
-    {
-            EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
-            Debug.Log("Pressed the key :" + KeyCode.H);
-        };
+    #endregion
 
-     * */
 
 }
