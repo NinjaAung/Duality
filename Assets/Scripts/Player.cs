@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetButtonDown("Grab"))
         {
-            grabbed = true;
+			grabbed = true;
 
         } else if (Input.GetButtonUp("Grab"))
 		{
@@ -45,7 +45,10 @@ public class Player : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		// Move our character
+		if (grabbed == true)
+		{
+			jump = false;
+		}
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 		controller.ObstacleGrab(grabbed);
