@@ -4431,7 +4431,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 274673713}
-  - component: {fileID: 274673712}
   - component: {fileID: 274673714}
   m_Layer: 0
   m_Name: GameManager
@@ -4440,19 +4439,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &274673712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274673711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a7949032c3fd4eb1b501c59036020e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pause: 0
 --- !u!4 &274673713
 Transform:
   m_ObjectHideFlags: 0
@@ -11596,9 +11582,10 @@ GameObject:
   - component: {fileID: 793570393}
   - component: {fileID: 793570392}
   - component: {fileID: 793570391}
-  m_Layer: 0
+  - component: {fileID: 793570395}
+  m_Layer: 12
   m_Name: big-crate
-  m_TagString: Untagged
+  m_TagString: ObstacleMovable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11714,6 +11701,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!255 &793570395
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793570390}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 9.917, y: -0.8699999}
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!1 &800622245
 GameObject:
   m_ObjectHideFlags: 0
@@ -16225,7 +16230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1050836130}
-  runSpeed: 40
+  runSpeed: 10
 --- !u!58 &1050836129
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16263,7 +16268,10 @@ MonoBehaviour:
     m_Bits: 16439
   m_GroundCheck: {fileID: 1698119296}
   m_CeilingCheck: {fileID: 850303620}
-  m_CrouchDisableCollider: {fileID: 0}
+  m_Distance: 1
+  m_ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 20535
 --- !u!1 &1063052428
 GameObject:
   m_ObjectHideFlags: 0
