@@ -32,10 +32,6 @@ EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
 
 * */
 
-public class WorldSwitchButton : DualityES.Event
-{
-
-}
 
 
 //A container class for all the GameObjects
@@ -76,8 +72,10 @@ public class GameManager: MonoBehaviour
 
     [Range(0,100)]
     public float m_Judgement;
-    [Range(0.01f,1f)]
-    public float m_IncreaseRate;
+    [Range(0.01f,1f),SerializeField]
+    private float m_IncreaseRate = 0.01f;
+    [Range(70, 100), SerializeField]
+    private float m_JudgementOverloadValue = 70.0f;
 
     private void Awake()
     {
@@ -110,9 +108,36 @@ public class GameManager: MonoBehaviour
         m_Judgement += m_IncreaseRate * Time.deltaTime;
         EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement});
 
-        if(cooldownPassed == false)
+        WSCooldownTimer();
+        
+    }
+
+    void JudgmentOverload()
+    {
+        if(m_Judgement >= m_JudgementOverloadValue)
         {
-            if(currTimer < m_WorldSwitchCooldownTimer)
+            EventSystem.instance.RaiseEvent( new PlayerDie { });
+            Debug.Log("Filler until program the Player death code");
+        }
+    }
+    // When programming the inverse correlation between judgement and player speed
+    //Add a <Judgement> listener in the Plyaer code to get the Judgement value and then
+    //find a way to code an inverse relationship between the speed and the judgement
+    void OnPlayerDeath(PlayerDie player)
+    {
+        //Either load the "save" feature or death UI play or directly take character to credit scene
+        //Save
+        //Or Death UI
+        //Or Change it to the credit scene
+    }
+
+
+    #region World Switching Functions
+    void WSCooldownTimer()
+    {
+        if (cooldownPassed == false)
+        {
+            if (currTimer < m_WorldSwitchCooldownTimer)
             {
                 currTimer += Time.deltaTime;
             }
@@ -123,12 +148,8 @@ public class GameManager: MonoBehaviour
 
             }
         }
-
     }
 
-
-
-    #region World Switching Functions
     //Receiving that the Input that the world is going to change it "tells" the rest of the scripts
     //Was done this way so the Input doesn't have to tell determine which world the player currently is in
     //Depending on which world the current player is in the world changes accordingly
@@ -187,7 +208,7 @@ public class GameManager: MonoBehaviour
     }
 
 
-#endregion
+    #endregion
 
 
 }

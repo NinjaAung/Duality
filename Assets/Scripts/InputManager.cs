@@ -15,6 +15,10 @@ public class KeyboardPressed : DualityES.Event
 }
 
 
+public class WorldSwitchButton : DualityES.Event
+{
+
+}
 
 public class InputManager : MonoBehaviour
 {
