@@ -58,7 +58,11 @@ public class InputManager : MonoBehaviour
             horizontal = Input.GetAxis("Horizontal"),
             vertical = Input.GetAxis("Vertical")
         });
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
 
+        };
 
         #region Pause
         if (Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.Joystick1Button3))

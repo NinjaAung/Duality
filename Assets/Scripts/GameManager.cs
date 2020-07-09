@@ -65,8 +65,20 @@ public class GameManager: MonoBehaviour
     public World world2Pull;
 
     public Worlds currentWorld;
+    
+    [Range(1,100), Tooltip("In terms of seconds")]
+    public float m_WorldSwitchCooldownTimer;
+
+    private float currTimer;
+    private bool cooldownPassed = true;
 
     #endregion
+
+    [Range(0,100)]
+    public float m_Judgement;
+    [Range(0.01f,1f)]
+    public float m_IncreaseRate;
+
     private void Awake()
     {
         currentWorld = Worlds.Push;
@@ -92,6 +104,29 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
     }
 
+    private void Update()
+    {
+        //Judgement Variable Update
+        m_Judgement += m_IncreaseRate * Time.deltaTime;
+        EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement});
+
+        if(cooldownPassed == false)
+        {
+            if(currTimer < m_WorldSwitchCooldownTimer)
+            {
+                currTimer += Time.deltaTime;
+            }
+            else
+            {
+                cooldownPassed = true;
+                currTimer = 0;
+
+            }
+        }
+
+    }
+
+
 
     #region World Switching Functions
     //Receiving that the Input that the world is going to change it "tells" the rest of the scripts
@@ -99,19 +134,24 @@ public class GameManager: MonoBehaviour
     //Depending on which world the current player is in the world changes accordingly
     private void OnWorldSwitch(WorldSwitchButton button)
     {
-        switch(currentWorld)
+        if (cooldownPassed)
         {
-            case Worlds.Push:
-                EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
-                break;
-            case Worlds.Pull:
-                EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
-                break;
-            case Worlds.Peace:
-                break;
-            default:
-                break;
+            cooldownPassed = false;
+            switch (currentWorld)
+            {
+                case Worlds.Push:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
+                    break;
+                case Worlds.Pull:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
+                    break;
+                case Worlds.Peace:
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 
     //Updating which world the player is in.
