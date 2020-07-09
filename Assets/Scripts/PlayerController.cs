@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 		} else if (!grabed)
 		{
 			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100f;
 		}
 
 	}
