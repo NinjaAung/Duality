@@ -872,6 +872,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2102698365540459355, guid: 433a75b21acdb416480d506450cea65e,
+        type: 3}
+      propertyPath: m_SlopeCheckDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2102698365540459357, guid: 433a75b21acdb416480d506450cea65e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -927,7 +932,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2102698365540459350, guid: 433a75b21acdb416480d506450cea65e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 433a75b21acdb416480d506450cea65e, type: 3}
 --- !u!1 &130010250
 GameObject:

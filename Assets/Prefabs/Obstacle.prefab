@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6675148926590483079}
   - component: {fileID: 6675148926590483083}
   m_Layer: 12
-  m_Name: big-crate
+  m_Name: Obstacle
   m_TagString: ObstacleMovable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3fc2bbd409bf34ab6af1637bab569da1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eadae27f3021740dfb0758aa1eee3c5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

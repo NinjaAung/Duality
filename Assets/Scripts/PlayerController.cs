@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using DualityES;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +18,23 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
+
+
+	[Header("Slope Checks "), Space(2)]
+	[SerializeField] private float maxSlopeAngle;
+	[SerializeField] private float SlopeCheckDistance;
+	[SerializeField] private PhysicsMaterial2D noFriction;
+    [SerializeField] private PhysicsMaterial2D fullFriction;
+	private float xInput;
+
+	private float slopeDownAngle;
+    private float slopeSideAngle;
+    private float lastSlopeAngle;
+	private bool canWalkOnSlope;
+	private bool isOnSlope;
+
+	private Vector2 slopeNormalPerp;
+
 	[Header("Grab & Pull"), Space(2)]
 	[Range(0, 1), SerializeField] private float m_Distance = 1f;
 	[SerializeField] private LayerMask m_ObstacleMask; 
@@ -32,14 +50,101 @@ public class PlayerController : MonoBehaviour
 	private bool m_FacingRight = true;  					// For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
 
+	private CapsuleCollider2D cc;
+	private Vector2 ColliderSize;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		cc = GetComponent<CapsuleCollider2D>();
+
+		ColliderSize = cc.size;
 	}
+
+	#region Slope Calculations
+	private void SlopeCheck()
+	{
+		Vector2 CheckPos = transform.position - new Vector3(0.0f, ColliderSize.y /  2);
+
+		SlopeCheckVertical(CheckPos);
+		SlopeCheckHorizontal(CheckPos);
+
+
+	}
+
+	 private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, SlopeCheckDistance, m_WhatIsGround);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, SlopeCheckDistance, m_WhatIsGround);
+
+        if (slopeHitFront)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+        }
+        else if (slopeHitBack)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            isOnSlope = false;
+        }
+
+    }
+
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {      
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, SlopeCheckDistance, m_WhatIsGround);
+
+        if (hit)
+        {
+
+            slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
+
+            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if(slopeDownAngle != lastSlopeAngle)
+            {
+                isOnSlope = true;
+            }                       
+
+            lastSlopeAngle = slopeDownAngle;
+           
+            Debug.DrawRay(hit.point, slopeNormalPerp, Color.blue);
+            Debug.DrawRay(hit.point, hit.normal, Color.green);
+
+        }
+
+        if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)
+        {
+            canWalkOnSlope = false;
+        }
+        else
+        {
+            canWalkOnSlope = true;
+        }
+
+        if (isOnSlope && canWalkOnSlope && xInput == 0.0f)
+        {
+            m_Rigidbody2D.sharedMaterial = fullFriction;
+        }
+        else
+        {
+            m_Rigidbody2D.sharedMaterial = noFriction;
+        }
+    }
+	#endregion
 
 
 	private void FixedUpdate()
 	{
+		SlopeCheck();
 		m_Grounded = false;
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -52,25 +157,27 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+
 	public void ObstacleGrab(bool grabed)
 	{
 		Physics2D.queriesStartInColliders = false;
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
 
-		if (hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
-			m_Obstacle = hit.collider.gameObject;
-			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
-			m_Obstacle.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
-			m_Obstacle.GetComponent<Rigidbody2D>().mass = 1f;
-		} else if (!grabed)
-		{
-			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
-			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100f;
-		}
+		//Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance , Color.green);
+
+		// if (hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
+		// 	m_Obstacle = hit.collider.gameObject;
+		// 	m_Obstacle.GetComponent<PositionConstraint>().enabled = true;
+
+		// } else if (!grabed)
+		// {
+		// 	m_Obstacle.GetComponent<PositionConstraint>().enabled = false;
+		// }
+		
 
 	}
 
-
+	#region Movement
 	public void Move(float move, bool crouch, bool jump)
 	{
 		// If crouching, check to see if the character can stand up
@@ -141,4 +248,5 @@ public class PlayerController : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+	#endregion
 }
