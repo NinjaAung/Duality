@@ -3129,7 +3129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968935208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5895454, y: -0.1063475, z: -10}
+  m_LocalPosition: {x: -0.58954555, y: -0.1063475, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1287917881}
@@ -3853,7 +3853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209509847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5895454, y: -0.1063475, z: -10}
+  m_LocalPosition: {x: -0.58954555, y: -0.1063475, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1734741574}
@@ -4317,7 +4317,7 @@ MonoBehaviour:
     m_World: {fileID: 1914348051}
     isActive: 0
   currentWorld: 0
-  m_WorldSwitchCooldownTimer: 5
+  m_WorldSwitchCooldownTimer: 0
   m_Judgement: 0
   m_IncreaseRate: 0.01
   m_JudgementOverloadValue: 70
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277035381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a7949032c3fd4eb1b501c59036020e9, type: 3}
+  m_Script: {fileID: 11500000, guid: ba8967dbc4ec649429ae7c8b51b71c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pause: 0
@@ -4375,7 +4375,10 @@ MonoBehaviour:
     m_Bits: 0
   m_GroundCheck: {fileID: 0}
   m_CeilingCheck: {fileID: 0}
-  m_CrouchDisableCollider: {fileID: 0}
+  m_Distance: 1
+  m_ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1287917880
 GameObject:
   m_ObjectHideFlags: 0
@@ -5955,10 +5958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b157996fa992f4ba88f0798cf487be62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dead: 0
-  jump_force: 50
-  side_force: 200
-  health: 100
+  controller: {fileID: 0}
+  runSpeed: 40
 --- !u!114 &1877015400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5980,7 +5981,10 @@ MonoBehaviour:
     m_Bits: 0
   m_GroundCheck: {fileID: 0}
   m_CeilingCheck: {fileID: 0}
-  m_CrouchDisableCollider: {fileID: 0}
+  m_Distance: 1
+  m_ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &1877015401
 SpriteRenderer:
   m_ObjectHideFlags: 0

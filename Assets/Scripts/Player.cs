@@ -83,6 +83,6 @@ public class Player : MonoBehaviour {
 		}
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
-		controller.ObstacleGrab(grabbed);
+		//controller.ObstacleGrab(grabbed);
 	}
 }

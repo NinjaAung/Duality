@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 		Physics2D.queriesStartInColliders = false;
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
 
-		if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
+		if (hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
 			m_Obstacle = hit.collider.gameObject;
 			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
 			m_Obstacle.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
