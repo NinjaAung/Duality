@@ -5,7 +5,7 @@ using DualityES;
 
 public class WorldSwitchButton : DualityES.Event
 {
-
+    public bool State = Input.GetButtonDown("World Switch");
 }
 
 public class InputManager : MonoBehaviour

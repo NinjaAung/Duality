@@ -14,24 +14,6 @@ public enum Worlds
     Pull,
     Peace
 }
-/*
-    Place this ontop of the Input Manager
-*/
-
-/*
-* 
-* Place this code in the Input Manager to have the world switching working. 
-
-Place this in the Unity Update Function in the Input Manager 
- if (Input.GetKeyDown(KeyCode.H))
-{
-EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
-
-};
-
-
-* */
-
 
 
 //A container class for all the GameObjects
@@ -112,17 +94,19 @@ public class GameManager: MonoBehaviour
         
     }
 
-    // void JudgmentOverload()
-    // {
-    //     if(m_Judgement >= m_JudgementOverloadValue)
-    //     {
-    //         EventSystem.instance.RaiseEvent( new PlayerDie { });
-    //         Debug.Log("Filler until program the Player death code");
-    //     }
-    // }
-    // When programming the inverse correlation between judgement and player speed
+    void JudgmentOverload()
+    {
+        if(m_Judgement >= m_JudgementOverloadValue)
+        {
+            //EventSystem.instance.RaiseEvent( new PlayerDie { });
+            Debug.Log("Filler until program the Player death code");
+        }
+    }
+
+    //When programming the inverse correlation between judgement and player speed
     //Add a <Judgement> listener in the Plyaer code to get the Judgement value and then
     //find a way to code an inverse relationship between the speed and the judgement
+
     // void OnPlayerDeath(PlayerDie player)
     // {
     //     //Either load the "save" feature or death UI play or directly take character to credit scene
@@ -157,19 +141,22 @@ public class GameManager: MonoBehaviour
     {
         if (cooldownPassed)
         {
-            cooldownPassed = false;
-            switch (currentWorld)
-            {
-                case Worlds.Push:
-                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
-                    break;
-                case Worlds.Pull:
-                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
-                    break;
-                case Worlds.Peace:
-                    break;
-                default:
-                    break;
+            if ( button.State ) {
+                
+                cooldownPassed = false;
+                switch (currentWorld)
+                {
+                    case Worlds.Push:
+                        EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
+                        break;
+                    case Worlds.Pull:
+                        EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
+                        break;
+                    case Worlds.Peace:
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
