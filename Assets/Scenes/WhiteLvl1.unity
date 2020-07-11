@@ -874,8 +874,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102698365540459355, guid: 433a75b21acdb416480d506450cea65e,
         type: 3}
-      propertyPath: m_SlopeCheckDistance
-      value: 3
+      propertyPath: m_Distance
+      value: 0.505
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102698365540459355, guid: 433a75b21acdb416480d506450cea65e,
+        type: 3}
+      propertyPath: m_ObstacleMask.m_Bits
+      value: 21559
       objectReference: {fileID: 0}
     - target: {fileID: 2102698365540459357, guid: 433a75b21acdb416480d506450cea65e,
         type: 3}
@@ -932,8 +937,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2102698365540459350, guid: 433a75b21acdb416480d506450cea65e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433a75b21acdb416480d506450cea65e, type: 3}
 --- !u!1 &130010250
 GameObject:
@@ -1777,6 +1781,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 6675148926590483079, guid: b63d8c5bd271a437c93752090782a4d9,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0028684735
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675148926590483079, guid: b63d8c5bd271a437c93752090782a4d9,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.31426305
+      objectReference: {fileID: 0}
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1831,6 +1845,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675148926590483083, guid: b63d8c5bd271a437c93752090782a4d9,
+        type: 3}
+      propertyPath: m_ConnectedRigidBody
+      value: 
+      objectReference: {fileID: 1877665881}
+    - target: {fileID: 6675148926590483083, guid: b63d8c5bd271a437c93752090782a4d9,
+        type: 3}
+      propertyPath: m_EnableCollision
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b63d8c5bd271a437c93752090782a4d9, type: 3}
@@ -2874,6 +2898,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2102698365540459357, guid: 433a75b21acdb416480d506450cea65e,
     type: 3}
   m_PrefabInstance: {fileID: 82072925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1877665881 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2248386250350052399, guid: 433a75b21acdb416480d506450cea65e,
+    type: 3}
+  m_PrefabInstance: {fileID: 127004172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1922210557
 PrefabInstance:

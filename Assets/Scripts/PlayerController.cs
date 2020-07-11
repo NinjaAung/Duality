@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using DualityES;
 
 public class PlayerController : MonoBehaviour
@@ -158,21 +157,22 @@ public class PlayerController : MonoBehaviour
 	}
 
 
-	public void ObstacleGrab(bool grabed)
+	public void ObstacleGrab(bool grabbed)
 	{
 		Physics2D.queriesStartInColliders = false;
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
+		Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
+		if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabbed) {
+			m_Obstacle = hit.collider.gameObject;
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 1;
 
-		//Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance , Color.green);
-
-		// if (hit.collider.gameObject.tag == "ObstacleMovable" && grabed) {
-		// 	m_Obstacle = hit.collider.gameObject;
-		// 	m_Obstacle.GetComponent<PositionConstraint>().enabled = true;
-
-		// } else if (!grabed)
-		// {
-		// 	m_Obstacle.GetComponent<PositionConstraint>().enabled = false;
-		// }
+		} else if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabbed == false)
+		{
+			m_Obstacle = hit.collider.gameObject;
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
+		}
 		
 
 	}
