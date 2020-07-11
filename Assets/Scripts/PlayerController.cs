@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DualityES;
 
 public class PlayerController : MonoBehaviour
@@ -39,11 +40,21 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private LayerMask m_ObstacleMask; 
 	GameObject m_Obstacle;
 
+	[Header("Events"), Space(2)]
+
+	public UnityEvent OnLandEvent;
+
+	[System.Serializable]
+	public class BoolEvent : UnityEvent<bool> { }
+
+	public BoolEvent OnCrouchEvent;
+	private bool m_wasCrouching = false;
 
 
-	const float k_GroundedRadius = .2f; 					// Radius of the overlap circle to determine if grounded
+
+	const float k_GroundedRadius = 0.2f; 					// Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            					// Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; 						// Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = 0.2f; 						// Radius of the overlap circle to determine if the player can stand up
 
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  					// For determining which way the player is currently facing.
@@ -54,6 +65,13 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
+		if (OnLandEvent == null)
+			OnLandEvent = new UnityEvent();
+
+		if (OnCrouchEvent == null)
+			OnCrouchEvent = new BoolEvent();
+
+		
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		cc = GetComponent<CapsuleCollider2D>();
 
@@ -144,6 +162,7 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		SlopeCheck();
+		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -153,6 +172,8 @@ public class PlayerController : MonoBehaviour
 		{
 			if (colliders[i].gameObject != gameObject)
 				m_Grounded = true;
+				if (!wasGrounded)
+					OnLandEvent.Invoke();
 		}
 	}
 
@@ -183,10 +204,16 @@ public class PlayerController : MonoBehaviour
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
+			if (!m_wasCrouching)
+				{
+					m_wasCrouching = true;
+					OnCrouchEvent.Invoke(true);
+				}
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
 				crouch = true;
+				
 			}
 		}
 
@@ -197,6 +224,11 @@ public class PlayerController : MonoBehaviour
 			// If crouching
 			if (crouch)
 			{
+				if (!m_wasCrouching)
+				{
+					m_wasCrouching = true;
+					OnCrouchEvent.Invoke(true);
+				}
 				// Reduce the speed by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
@@ -208,6 +240,12 @@ public class PlayerController : MonoBehaviour
 				// Enable the collider when not crouching
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = true;
+
+				if (m_wasCrouching)
+				{
+					m_wasCrouching = false;
+					OnCrouchEvent.Invoke(false);
+				}
 			}
 
 			// Move the character by finding the target velocity

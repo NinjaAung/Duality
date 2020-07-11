@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 2248386250350052399}
   - component: {fileID: 2102698365540459351}
   - component: {fileID: 6376242181019284362}
+  - component: {fileID: 1454628836}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -174,10 +175,38 @@ MonoBehaviour:
   SlopeCheckDistance: 0.5
   noFriction: {fileID: 6200000, guid: 5b93aa7984eda4de490e2d61fbd975ee, type: 2}
   fullFriction: {fileID: 6200000, guid: 19c5328a648b64ec8859835193ff32d0, type: 2}
-  m_Distance: 0
+  m_Distance: 0.505
   m_ObstacleMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 21559
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2102698365540459352}
+        m_MethodName: OnLanding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCrouchEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2102698365540459352}
+        m_MethodName: OnCrouch
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2102698365540459352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2102698365540459355}
+  animator: {fileID: 1454628836}
   runSpeed: 10
 --- !u!50 &2248386250350052399
 Rigidbody2D:
@@ -255,3 +285,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.000071525574, y: -0.081940904}
   m_Size: {x: 0.14648056, y: 0.15688118}
   m_Direction: 0
+--- !u!95 &1454628836
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102698365540459348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca386650a3e3e4306b2aad8bafd76ef9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

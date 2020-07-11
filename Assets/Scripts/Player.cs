@@ -6,6 +6,7 @@ using DualityES;
 public class Player : MonoBehaviour {
 
 	public PlayerController controller;
+	public Animator animator;
 
 	public float runSpeed = 40f;
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour {
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
+			animator.SetBool("isJumping", true);
 		}
 
 		if (Input.GetButtonDown("Crouch"))
@@ -72,9 +74,20 @@ public class Player : MonoBehaviour {
 			grabbed = false;
 		}
 
+		animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
 	}
 
+	public void OnLanding() 
+	{
+		animator.SetBool("isJumping", false);
+	} 
+
+	public void OnCrouch(bool isCrouching)
+	{
+		animator.SetBool("isCrouching",isCrouching);
+	}
+	
 	void FixedUpdate ()
 	{
 		if (grabbed == true)
