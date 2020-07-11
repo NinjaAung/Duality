@@ -141,23 +141,20 @@ public class GameManager: MonoBehaviour
     {
         if (cooldownPassed)
         {
-            if ( button.State ) {
-                
-                cooldownPassed = false;
-                switch (currentWorld)
-                {
-                    case Worlds.Push:
-                        EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
-                        break;
-                    case Worlds.Pull:
-                        EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
-                        break;
-                    case Worlds.Peace:
-                        break;
-                    default:
-                        break;
+            cooldownPassed = false;
+            switch (currentWorld)
+            {
+                case Worlds.Push:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Pull });
+                    break;
+                case Worlds.Pull:
+                    EventSystem.instance.RaiseEvent(new WorldSwitching { targetWorld = Worlds.Push });
+                    break;
+                case Worlds.Peace:
+                    break;
+                default:
+                    break;
                 }
-            }
         }
 
     }
