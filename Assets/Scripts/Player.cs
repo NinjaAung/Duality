@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
 	{
 		animator.SetBool("isCrouching",isCrouching);
 	}
-	
+
 	void FixedUpdate ()
 	{
 		if (grabbed == true)
@@ -95,6 +95,7 @@ public class Player : MonoBehaviour {
 			jump = false;
 		}
 		controller.ObstacleGrab(grabbed);
+		Debug.Log(crouch);
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
