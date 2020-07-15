@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using DualityES;
 public class MainMenu : MonoBehaviour
 {
     public void OnPlay() {
         Debug.Log("'PLAY' Pressed");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        EventSystem.instance.RaiseEvent(new SceneLoadNext { });
+        //Scenemanager.Instance.NextScene(); Getting an error for no reason :(( Not regeistering the Next Scene
     }
 
     public void OnOptions() {

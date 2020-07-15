@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/0_GHSplash.unity
+    guid: 4b0c209d557702d4ca5cf0a6d71cba40
+  - enabled: 1
+    path: Assets/Scenes/1_Menu.unity
     guid: 7590d4f1a04de44f4b741a62ac4cc179
   - enabled: 1
     path: Assets/Scenes/Level_01.unity
