@@ -287,4 +287,10 @@ public class PlayerController : MonoBehaviour
 		transform.localScale = theScale;
 	}
 	#endregion
+
+	public class PlayerDie : DualityES.Event
+	{
+	}
+
+
 }

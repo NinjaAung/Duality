@@ -19,37 +19,30 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	public void Awake()
     {
-        EventSystem.instance.AddListener<PlayerDie>(Die);
+        //EventSystem.instance.AddListener<PlayerDie>(Die);
 
     }
 	
 
-	public class PlayerDie : DualityES.Event
-	{
-    
-	}
 
-
-
-
-
-	public void Die(PlayerDie playerDie)
-    {
-        //isInControl = false;
-        dead = true;
-        //have to make sure player movement is no existent
-        //rb.velocity = Vector3.zero;
+	// public void Die(PlayerDie playerDie)
+    // {
+    //     //isInControl = false;
+    //     dead = true;
+    //     //have to make sure player movement is no existent
+    //     //rb.velocity = Vector3.zero;
         
-    }
+    // }
 
     private void OnDisable()
     {
-        EventSystem.instance.RemoveListener<PlayerDie>(Die);
+       // EventSystem.instance.RemoveListener<PlayerDie>(Die);
 	}
 
 	void Update () {
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
 
 		if (Input.GetButtonDown("Jump"))
 		{
