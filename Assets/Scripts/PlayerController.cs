@@ -35,11 +35,6 @@ public class PlayerController : MonoBehaviour
 
 	private Vector2 slopeNormalPerp;
 
-	[Header("Grab & Pull"), Space(2)]
-	[Range(0, 1), SerializeField] private float m_Distance = 1f;
-	[SerializeField] private LayerMask m_ObstacleMask; 
-	GameObject m_Obstacle;
-
 	[Header("Events"), Space(2)]
 
 	public UnityEvent OnLandEvent;
@@ -49,7 +44,6 @@ public class PlayerController : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
-
 
 
 	const float k_GroundedRadius = 0.2f; 					// Radius of the overlap circle to determine if grounded
@@ -177,26 +171,6 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-
-	public void ObstacleGrab(bool grabbed)
-	{
-		Physics2D.queriesStartInColliders = false;
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
-		Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
-		if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabbed) {
-			m_Obstacle = hit.collider.gameObject;
-			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
-			m_Obstacle.GetComponent<Rigidbody2D>().mass = 1;
-
-		} else if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && grabbed == false)
-		{
-			m_Obstacle = hit.collider.gameObject;
-			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
-			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
-		}
-		
-
-	}
 
 	#region Movement
 	public void Move(float move, bool crouch, bool jump)

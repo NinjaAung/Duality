@@ -15,6 +15,11 @@ public class Player : MonoBehaviour {
 	bool crouch = false;
 	bool grabbed = false;
 	bool dead = false;
+
+	[Header("Grab & Pull"), Space(2)]
+	[Range(0, 1), SerializeField] private float m_Distance = 1f;
+	[SerializeField] private LayerMask m_ObstacleMask; 
+	GameObject m_Obstacle;
 	
 	// Update is called once per frame
 	public void Awake()
@@ -41,6 +46,11 @@ public class Player : MonoBehaviour {
 
 	void Update () {
 
+
+		Physics2D.queriesStartInColliders = false;
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
+		Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
+
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
 
@@ -58,13 +68,17 @@ public class Player : MonoBehaviour {
 			crouch = false;
 		}
 
-        if (Input.GetButtonDown("Grab"))
+        if (hit.collider != null && hit.collider.gameObject.tag == "ObstacleMovable" && Input.GetButtonDown("Grab"))
         {
-			grabbed = true;
-
-        } else if (Input.GetButtonUp("Grab"))
+			m_Obstacle = hit.collider.gameObject;
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 1;
+		}
+		else if (Input.GetButtonUp("Grab"))
 		{
-			grabbed = false;
+			m_Obstacle = hit.collider.gameObject;
+			m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+			m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
 		}
 
 		animator.SetFloat("speed", Mathf.Abs(horizontalMove));
@@ -83,11 +97,10 @@ public class Player : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		if (grabbed == true)
+		if ( Input.GetButtonDown("Grab") )
 		{
 			jump = false;
 		}
-		controller.ObstacleGrab(grabbed);
 		Debug.Log(crouch);
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
