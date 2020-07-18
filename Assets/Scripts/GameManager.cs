@@ -54,7 +54,7 @@ public class GameManager: MonoBehaviour
 
     [Range(0,100)]
     public float m_Judgement;
-    [Range(0.01f,1f),SerializeField]
+    [Range(1f,10f),SerializeField]
     private float m_IncreaseRate = 0.01f;
     [Range(70, 100), SerializeField]
     private float m_JudgementOverloadValue = 70.0f;
@@ -76,12 +76,16 @@ public class GameManager: MonoBehaviour
         //Listening to when the World Switches
         EventSystem.instance.AddListener<WorldSwitching>(WorldSwitch);
 
+        EventSystem.instance.AddListener<ObjectContact>(NonNativeResponse);
+
     }
 
     private void OnDisable()
     {
         EventSystem.instance.RemoveListener<WorldSwitchButton>(OnWorldSwitch);
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
+        EventSystem.instance.RemoveListener<ObjectContact>(NonNativeResponse);
+
     }
 
     private void Update()
@@ -90,17 +94,50 @@ public class GameManager: MonoBehaviour
         m_Judgement += m_IncreaseRate * Time.deltaTime;
         EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement});
 
-        WSCooldownTimer();
-        
+        if(m_Judgement < 20)
+        {
+            AudioManager.instance.RemoveHeartBeat();
+        }
+        else
+        {
+            AudioManager.instance.PlayHeartBeat();
+        }
+
+        WSCooldownTimer(); // So they Don't spam the World Switching Mechanic
+        JudgmentOverload();
     }
 
     void JudgmentOverload()
     {
         if(m_Judgement >= m_JudgementOverloadValue)
         {
-            //EventSystem.instance.RaiseEvent( new PlayerDie { });
-            Debug.Log("Filler until program the Player death code");
+            EventSystem.instance.RaiseEvent( new PlayerState { dead = true});
+            //Debug.Log("Filler until program the Player death code");
         }
+    }
+
+
+    //When using the "non native" mechanic
+    void NonNativeResponse(ObjectContact contact)
+    {
+        if(contact.contact == TypeOfContact.PullingObject)
+        {
+            if(currentWorld == Worlds.Push)
+            {
+                m_IncreaseRate += 2;
+                Debug.Log("World Response");
+            }
+        }
+        if (contact.contact == TypeOfContact.PushingObject)
+        {
+            if(currentWorld == Worlds.Pull)
+            {
+                m_IncreaseRate += 2;
+                Debug.Log("World Response");
+
+            }
+        }
+
     }
 
     //When programming the inverse correlation between judgement and player speed
@@ -163,6 +200,8 @@ public class GameManager: MonoBehaviour
     //Setting the world variables to be off or on, 
     private void WorldSwitch(WorldSwitching target)
     {
+        m_Judgement = 0;
+        m_IncreaseRate = 0.01f;
         switch (target.targetWorld)
         {
             case Worlds.Push:

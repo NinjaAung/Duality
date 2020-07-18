@@ -36,7 +36,6 @@ public class InputManager : MonoBehaviour
 
 
 
-
     private void OnDisable()
     {
     }
@@ -65,6 +64,24 @@ public class InputManager : MonoBehaviour
             EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
         }
 
+        //if (checkRestartButton)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.R))
+        //    {
+        //        checkRestartButton = false;
+        //        EventSystem.instance.RaiseEvent(new ReloadScene{ });
+        //    }
+        //}
+
+    }
+
+
+    private void CheckForState(PlayerState playerState)
+    {
+        if (playerState.dead == true)
+        {
+            //checkRestartButton = true;
+        }
     }
 
 }

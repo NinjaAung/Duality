@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef10665206340ef4abef84478f51f06f, type: 3}
+  m_Name: HeartBeatJudgment
+  m_EditorClassIdentifier: 
+  m_requirements: 1
+  m_valuesMix: 0
+  m_values: []
+  m_eventsMix: 0
+  m_events:
+  - Heartbeat
+  m_clipData:
+  - m_clip: {fileID: 8300000, guid: 6aceff8e0f7fc744ea17df755a3f9492, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 55652b1afec0744468ec74c7a228d821, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: b5ffe5b3661f290449576fcb541973ee, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: d2fc17089ca105541a29fefff77f68d8, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 12e19a08f9b89aa459802999c8246400, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 1c569d4fa5b298549a5f7f5b6f367933, type: 3}
+    m_volume: 1
+  - m_clip: {fileID: 8300000, guid: 6628e3a6fc61f654eab22d281e7371a7, type: 3}
+    m_volume: 1
+  m_clips: []
+  m_volume: 1
+  m_playbackSpeed: 1
+  m_randomizeOrder: 1
+  m_crossFade: 0
+  m_trackFadeTime: 2.5
+  m_volumeFadeTime: 1
+  m_playbackSpeedFadeTime: 1
+  m_delayChance: 100
+  m_delayFadeTime: 0
+  m_minMaxDelay: {x: 0, y: 0}
+  m_randomVolume: 0
+  m_minMaxVolume: {x: 0, y: 1}
+  m_randomPlaybackSpeed: 0
+  m_minMaxPlaybackSpeed: {x: 0, y: 1}
+  m_modifiers: []
+  m_outputType: 0
+  m_outputPrefab: {fileID: 0}
+  m_outputDirect: 0
+  m_outputDistance: {x: 0, y: 0}
+  m_outputVerticalAngle: {x: -180, y: 180}
+  m_outputHorizontalAngle: {x: -180, y: 180}
+  m_outputFollowPosition: 1
+  m_outputFollowRotation: 0
+  m_syncGroup: 
+  m_syncType: 16
+  m_eventsWhilePlaying: []
+  m_valuesWhilePlaying: []
+  m_OnPlayClip:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnStopClip:
+    m_PersistentCalls:
+      m_Calls: []

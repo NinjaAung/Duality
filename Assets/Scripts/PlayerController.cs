@@ -239,7 +239,12 @@ public class PlayerController : MonoBehaviour
 				// ... flip the player.
 				Flip();
 			}
-		}
+
+            if(m_Grounded && Mathf.Abs(move)  > 0)
+            {
+                AudioManager.instance.PlayFootStepAudio();
+            }
+        }
 		// If the player should jump...
 		if (m_Grounded && jump)
 		{
