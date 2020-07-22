@@ -99,15 +99,15 @@ public class Player : MonoBehaviour {
             {
                 grabbedObject = true;
                 m_Obstacle = hit.collider.gameObject;
-                m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
-                m_Obstacle.GetComponent<Rigidbody2D>().mass = 1;
+                AttachObstacle(true);
+
             }
             else if (Input.GetButton("Grab") == false)
             {
                 grabbedObject = false;
                 m_Obstacle = hit.collider.gameObject;
-                m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
-                m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
+                AttachObstacle(false);
+
             }
         }
 
@@ -137,22 +137,42 @@ public class Player : MonoBehaviour {
         {
             if (objectOnRight && (horizontal == -1))
             {
+                if (m_Obstacle.GetComponent<Obstacle>().GetPullable() == false)
+                {
+                    AttachObstacle(false);
+                    return;
+                }
                 //Debug.Log(" Pulling to the left");
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PullingObject });
             }
             else if (objectOnRight && (horizontal == 1))
             {
+                if (m_Obstacle.GetComponent<Obstacle>().GetPushable() == false)
+                {
+                    AttachObstacle(false);
+                    return;
+                }
                 //Debug.Log(" Pushing to the right");
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PushingObject });
             }
             else if (objectOnRight == false && horizontal == -1)
             {
+                if (m_Obstacle.GetComponent<Obstacle>().GetPushable() == false)
+                {
+                    AttachObstacle(false);
+                    return;
+                }
                 //Debug.Log("Push to the left");
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PushingObject});
 
             }
             else if (objectOnRight == false && horizontal == 1)
             {
+                if (m_Obstacle.GetComponent<Obstacle>().GetPullable() == false)
+                {
+                    AttachObstacle(false);
+                    return;
+                }
                 //Debug.Log(" Pulling to the right");
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PullingObject });
 
@@ -161,6 +181,19 @@ public class Player : MonoBehaviour {
 
     }
 
+    public void AttachObstacle(bool attach)
+    {
+        if (attach)
+        {
+            m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+            m_Obstacle.GetComponent<Rigidbody2D>().mass = 1;
+        }
+        else
+        {
+            m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+            m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
+        }
+    }
 
 	public void OnLanding() 
 	{
