@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
 	float horizontalMove = 0f;
 	bool jump = false;
 	bool crouch = false;
-	//bool grabbed = false;
+	public bool grab = false;
 	bool dead = false;
 
 
@@ -39,11 +39,14 @@ public class Player : MonoBehaviour {
 	[Header("Grab & Pull"), Space(2)]
 	[Range(0, 1), SerializeField] private float m_Distance = 1f;
 	[SerializeField] private LayerMask m_ObstacleMask; 
-	GameObject m_Obstacle;
+	public GameObject m_Obstacle;
 	
 	public void Awake()
     {
         EventSystem.instance.AddListener<PlayerState>(ControllerToggle);
+        EventSystem.instance.AddListener<JumpButton>(OnJump);
+        EventSystem.instance.AddListener<GrabButton>(OnGrab);
+        EventSystem.instance.AddListener<MovementInput>(GetHorizontal);
 
     }
 
@@ -61,7 +64,10 @@ public class Player : MonoBehaviour {
     private void OnDisable()
     {
        EventSystem.instance.RemoveListener<PlayerState>(ControllerToggle);
-	}
+       EventSystem.instance.RemoveListener<JumpButton>(OnJump);
+       EventSystem.instance.RemoveListener<GrabButton>(OnGrab);
+       EventSystem.instance.RemoveListener<MovementInput>(GetHorizontal);
+    }
 
 	void Update () {
 
@@ -75,14 +81,8 @@ public class Player : MonoBehaviour {
 		RaycastHit2D leftRayHit = Physics2D.Raycast(transform.position, Vector2.right * -1 , m_Distance, m_ObstacleMask);
 		Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+	
 
-
-		if (Input.GetButtonDown("Jump"))
-		{
-			jump = true;
-			animator.SetBool("isJumping", true);
-		}
         //Crouch
 		    //if (Input.GetButtonDown("Crouch"))
 		    //{
@@ -95,14 +95,15 @@ public class Player : MonoBehaviour {
         //Grab 
         if(hit.collider != null)
         {
-            if (hit.collider.gameObject.tag == "ObstacleMovable" && Input.GetButton("Grab"))
+            if (hit.collider.gameObject.tag == "ObstacleMovable" && grab)
             {
                 grabbedObject = true;
                 m_Obstacle = hit.collider.gameObject;
                 AttachObstacle(true);
+                Debug.Log("Should Pick Up");
 
             }
-            else if (Input.GetButton("Grab") == false)
+            else if (grab == false)
             {
                 grabbedObject = false;
                 m_Obstacle = hit.collider.gameObject;
@@ -194,6 +195,22 @@ public class Player : MonoBehaviour {
             m_Obstacle.GetComponent<Rigidbody2D>().mass = 100;
         }
     }
+    
+    public void OnGrab(GrabButton _grab)
+    {
+        grab = _grab.grab;
+        if (grab)
+        {
+            Debug.Log("grab it hoe");
+        }
+        
+    }
+    public void OnJump(JumpButton _jump)
+    {
+        //not necessary to use _jump in function, only here to use function in event system
+        jump = true;
+        animator.SetBool("isJumping", true);
+    }
 
 	public void OnLanding() 
 	{
@@ -205,17 +222,22 @@ public class Player : MonoBehaviour {
 		animator.SetBool("isCrouching",isCrouching);
 	}
 
+    public void GetHorizontal(MovementInput _horiz)
+    {
+        horizontalMove = _horiz.movInput * runSpeed;
+    }
 
 	void FixedUpdate ()
 	{
-		if ( Input.GetButtonDown("Grab") )
-		{
-			jump = false;
-		}
-        if(dead == false)
+        if (grab)
+        {
+            jump = false;
+        }
+        if (dead == false)
         {
             controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         }
         jump = false;
-	}
+
+    }
 }

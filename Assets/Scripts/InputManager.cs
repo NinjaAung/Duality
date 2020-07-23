@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualityES;
 
+#region Input Events
+public class PauseGame : DualityES.Event
+{
+}
 public class WorldSwitchButton : DualityES.Event
 {
 }
+
+public class JumpButton : DualityES.Event
+{
+}
+
+public class GrabButton : DualityES.Event
+{
+    public bool grab;
+}
+
+public class MovementInput : DualityES.Event
+{
+    public float movInput;
+}
+#endregion
 
 public class InputManager : MonoBehaviour
 {
 
     protected static InputManager _instance;
-    bool checkRestartButton = false;
-
-    public bool pause = false;
+    //bool checkRestartButton = false;
 
     public static InputManager Instance
     {
@@ -22,6 +39,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        //Singleton
         if (_instance == null)
         {
             _instance = this;
@@ -30,8 +48,6 @@ public class InputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    
-
     }
 
 
@@ -44,26 +60,39 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
 
-        #region Pause
         if (Input.GetButtonDown("Pause"))
         {
-            if (!pause)
-            {
-                //EventSystem.instance.RaiseEvent(new PauseGame { pause = true });
-                pause = true;
-            }
-            else
-            {
-                //EventSystem.instance.RaiseEvent(new PauseGame { pause = false });
-                pause = false;
-            }
+            //triggers update pause variable in game manager script
+            EventSystem.instance.RaiseEvent(new PauseGame { });
         }
-        #endregion
+    
+
         if(Input.GetButtonDown("World Switch"))
         {
             EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
         }
 
+        if (Input.GetButtonDown("Jump"))
+        {
+            EventSystem.instance.RaiseEvent(new JumpButton { });
+        }
+
+        if (Input.GetButton("Grab"))
+        {
+            EventSystem.instance.RaiseEvent(new GrabButton { grab = true });
+        }
+        else
+        {
+            EventSystem.instance.RaiseEvent(new GrabButton { grab = false });
+        }
+
+        //really insists on getting movement input etc. from the input manager for when we have to start
+        //taking into account different axes from diferent controllers
+        //for example, in the future if needed we can convert this input manager to an abstract class
+        if (Input.GetAxisRaw("Horizontal") != null)
+        {
+            EventSystem.instance.RaiseEvent(new MovementInput { movInput = Input.GetAxisRaw("Horizontal") });
+        }
         //if (checkRestartButton)
         //{
         //    if (Input.GetKeyDown(KeyCode.R))

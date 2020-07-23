@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualityES;
 
+//Events associated with Game Manager
 public class Judgment: DualityES.Event
 {
     public float JudgmentScore;
+}
+
+public class WorldSwitching : DualityES.Event
+{
+    public Worlds targetWorld;
 }
 
 public enum Worlds
@@ -30,10 +36,7 @@ public class World {
 
 }
 
-public class WorldSwitching : DualityES.Event
-{
-    public Worlds targetWorld;
-}
+
 
 public class GameManager: MonoBehaviour
 {
@@ -48,7 +51,7 @@ public class GameManager: MonoBehaviour
     public float m_WorldSwitchCooldownTimer;
 
     private float currTimer;
-    private bool cooldownPassed = true;
+    public  bool cooldownPassed = true;
 
     #endregion
 
@@ -58,6 +61,8 @@ public class GameManager: MonoBehaviour
     private float m_IncreaseRate = 0.01f;
     [Range(70, 100), SerializeField]
     private float m_JudgementOverloadValue = 70.0f;
+
+    public bool pause;
 
     private void Awake()
     {
@@ -78,6 +83,8 @@ public class GameManager: MonoBehaviour
 
         EventSystem.instance.AddListener<ObjectContact>(NonNativeResponse);
 
+        EventSystem.instance.AddListener<PauseGame>(Pause);
+
     }
 
     private void OnDisable()
@@ -90,10 +97,13 @@ public class GameManager: MonoBehaviour
 
     private void Update()
     {
-        //Judgement Variable Update
-        m_Judgement += m_IncreaseRate * Time.deltaTime;
-        EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement});
 
+        //Judgement Variable Update
+        if (cooldownPassed)
+        {
+            m_Judgement += m_IncreaseRate * Time.deltaTime;
+            EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement });
+        }
         if(m_Judgement < 20)
         {
             AudioManager.instance.RemoveHeartBeat();
@@ -161,12 +171,14 @@ public class GameManager: MonoBehaviour
             if (currTimer < m_WorldSwitchCooldownTimer)
             {
                 currTimer += Time.deltaTime;
+                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
+                m_Judgement -= currTimer * .0047f;
+                EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement });
             }
             else
             {
                 cooldownPassed = true;
                 currTimer = 0;
-
             }
         }
     }
@@ -178,6 +190,7 @@ public class GameManager: MonoBehaviour
     {
         if (cooldownPassed)
         {
+            m_IncreaseRate = 0.1f;
             cooldownPassed = false;
             switch (currentWorld)
             {
@@ -200,8 +213,8 @@ public class GameManager: MonoBehaviour
     //Setting the world variables to be off or on, 
     private void WorldSwitch(WorldSwitching target)
     {
-        m_Judgement = 0;
-        m_IncreaseRate = 0.01f;
+        //m_Judgement = 0;
+       // m_IncreaseRate = 0.01f;
         switch (target.targetWorld)
         {
             case Worlds.Push:
@@ -233,5 +246,20 @@ public class GameManager: MonoBehaviour
 
     #endregion
 
+
+    void Pause(PauseGame m_pause)
+    {
+        pause = !pause;
+        EventSystem.instance.RaiseEvent(new PauseGameUI{ enabled = pause});
+
+        if (pause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
 }

@@ -4,19 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using DualityES;
 
-
+public class PauseGameUI : DualityES.Event
+{
+    public bool enabled;
+}
 public class UIManager : MonoBehaviour
 {
     public Canvas deathCanvas;
+    public Canvas pauseCanvas;
 
     private void Awake()
     {
         EventSystem.instance.AddListener<PlayerState>(OnPlayerDeath);
+        EventSystem.instance.AddListener<PauseGameUI>(PauseGameUI);
     }
     private void OnDisable()
     {
         EventSystem.instance.RemoveListener<PlayerState>(OnPlayerDeath);
-
+        EventSystem.instance.RemoveListener<PauseGameUI>(PauseGameUI);
     }
 
     private void OnPlayerDeath(PlayerState playerState)
@@ -28,6 +33,18 @@ public class UIManager : MonoBehaviour
         else
         {
             deathCanvas.enabled = false;
+        }
+    }
+
+    private void PauseGameUI(PauseGameUI pause)
+    {
+        if (pause.enabled)
+        {
+            pauseCanvas.enabled = true;
+        }
+        else
+        {
+            pauseCanvas.enabled = false;
         }
     }
 
