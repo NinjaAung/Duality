@@ -48,4 +48,8 @@ public class Scenemanager : MonoBehaviour
         SceneManager.LoadScene(temp);
         sceneIndex++;
     }
+
+
+
+
 }
