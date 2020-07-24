@@ -57,7 +57,19 @@ public class PlayerController : MonoBehaviour
 	private CapsuleCollider2D cc;
 	private Vector2 ColliderSize;
 
-	private void Awake()
+    private bool m_grabbing;
+
+    private void OnEnable()
+    {
+        EventSystem.instance.AddListener<GrabbingObject>(CheckingIfGrabbing);
+    }
+    private void OnDisable()
+    {
+        EventSystem.instance.RemoveListener<GrabbingObject>(CheckingIfGrabbing);
+
+    }
+
+    private void Awake()
 	{
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -257,6 +269,11 @@ public class PlayerController : MonoBehaviour
 
 	private void Flip()
 	{
+        if (m_grabbing)
+        {
+            return;
+        }
+
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
@@ -267,9 +284,10 @@ public class PlayerController : MonoBehaviour
 	}
 	#endregion
 
-	public class PlayerDie : DualityES.Event
-	{
-	}
+    public void CheckingIfGrabbing(GrabbingObject grabbingObject)
+    {
+        m_grabbing = grabbingObject.grabbing;
+    }
 
 
 }

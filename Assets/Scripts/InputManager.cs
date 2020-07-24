@@ -89,10 +89,11 @@ public class InputManager : MonoBehaviour
         //really insists on getting movement input etc. from the input manager for when we have to start
         //taking into account different axes from diferent controllers
         //for example, in the future if needed we can convert this input manager to an abstract class
-        if (Input.GetAxisRaw("Horizontal") != null)
-        {
-            EventSystem.instance.RaiseEvent(new MovementInput { movInput = Input.GetAxisRaw("Horizontal") });
-        }
+        //if (Input.GetAxisRaw("Horizontal") != null)
+        //{
+        //}
+        EventSystem.instance.RaiseEvent(new MovementInput { movInput = Input.GetAxisRaw("Horizontal") });
+
         //if (checkRestartButton)
         //{
         //    if (Input.GetKeyDown(KeyCode.R))

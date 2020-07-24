@@ -134,7 +134,7 @@ public class GameManager: MonoBehaviour
         {
             if(currentWorld == Worlds.Push)
             {
-                m_IncreaseRate += 2;
+                m_IncreaseRate += 0.02f;
                 Debug.Log("World Response");
             }
         }
@@ -142,7 +142,7 @@ public class GameManager: MonoBehaviour
         {
             if(currentWorld == Worlds.Pull)
             {
-                m_IncreaseRate += 2;
+                m_IncreaseRate += 0.02f;
                 Debug.Log("World Response");
 
             }
@@ -171,7 +171,7 @@ public class GameManager: MonoBehaviour
             if (currTimer < m_WorldSwitchCooldownTimer)
             {
                 currTimer += Time.deltaTime;
-                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
+//                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
                 m_Judgement -= currTimer * .0047f;
                 EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement });
             }
