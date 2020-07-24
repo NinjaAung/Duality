@@ -364,7 +364,7 @@ PrefabInstance:
     - target: {fileID: -7834720786310674009, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.0038362
+      value: 1.003836
       objectReference: {fileID: 0}
     - target: {fileID: -7834720786310674009, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
@@ -531,6 +531,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2196833187104010464, guid: 8d9b36f66325d4daf8c368367948b322,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2305341
+      objectReference: {fileID: 0}
+    - target: {fileID: -2196833187104010464, guid: 8d9b36f66325d4daf8c368367948b322,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000007723367
+      objectReference: {fileID: 0}
     - target: {fileID: -1887859738925989061, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
       propertyPath: m_Name
@@ -590,6 +600,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9997833
+      objectReference: {fileID: 0}
+    - target: {fileID: -1594558972061292589, guid: 8d9b36f66325d4daf8c368367948b322,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2475064
+      objectReference: {fileID: 0}
+    - target: {fileID: -1594558972061292589, guid: 8d9b36f66325d4daf8c368367948b322,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000044352495
       objectReference: {fileID: 0}
     - target: {fileID: -1287431024731532216, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
@@ -789,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 2171522663979849724, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.62
+      value: -5.46
       objectReference: {fileID: 0}
     - target: {fileID: 2171522663979849724, guid: 8d9b36f66325d4daf8c368367948b322,
         type: 3}
