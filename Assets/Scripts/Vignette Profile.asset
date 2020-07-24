@@ -44,13 +44,13 @@ MonoBehaviour:
     value: 1
   smoothness:
     overrideState: 1
-    value: 0.666
+    value: 1
   roundness:
     overrideState: 1
-    value: 0.939
+    value: 0.927
   rounded:
-    overrideState: 1
-    value: 0
+    overrideState: 0
+    value: 1
   mask:
     overrideState: 1
     value: {fileID: 2800000, guid: 8e160a2a620644cd6afef9119dad1093, type: 3}
