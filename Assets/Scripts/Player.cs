@@ -105,7 +105,7 @@ public class Player : MonoBehaviour {
                 grabbedObject = true;
                 m_Obstacle = hit.collider.gameObject;
                 AttachObstacle(true);
-                Debug.Log("Should Pick Up");
+                //Debug.Log("Should Pick Up");
 
             }
             else if (grab == false)
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour {
             PushOrPull(leftRayHit, horizontalMove);
         }
 
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+		animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
 	}
 
@@ -198,17 +198,18 @@ public class Player : MonoBehaviour {
     {
         if (attach)
         {
-            DisableBothAnim();
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = true });
-            m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
-            m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            m_Obstacle.GetComponent<Obstacle>().Grab(this);
+            //m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+            //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
         else
         {
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = false });
             DisableBothAnim();
-            m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
-            m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+            m_Obstacle.GetComponent<Obstacle>().Release(this);
+            //m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+            //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
     
@@ -217,7 +218,7 @@ public class Player : MonoBehaviour {
         grab = _grab.grab;
         if (grab)
         {
-            Debug.Log("grab it hoe");
+            //Debug.Log("grab it hoe");
         }
         
     }
@@ -236,19 +237,19 @@ public class Player : MonoBehaviour {
 
     private void OnPush()
     {
-        animator.SetBool("Pull", false);
-        animator.SetBool("Push", true);
+        animator.SetBool("pull", false);
+        animator.SetBool("push", true);
     }
     private void OnPull()
     {
-        animator.SetBool("Push", false);
-        animator.SetBool("Pull", true);
+        animator.SetBool("push", false);
+        animator.SetBool("pull", true);
     }
 
     private void DisableBothAnim()
     {
-        animator.SetBool("Push", false);
-        animator.SetBool("Pull", false);
+        animator.SetBool("push", false);
+        animator.SetBool("pull", false);
     }
 
     /*
