@@ -7,11 +7,9 @@ public class BrittleWall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision Contact");
         if (collision.gameObject.CompareTag("ObstacleMovable"))
         {
-            Debug.Log("Obstacle Contact");
-            if (collision.gameObject.GetComponent<Rigidbody2D>().mass > 7)
+            if (collision.gameObject.GetComponent<Obstacle>().type.Equals(Obstacle.ObstacleType.Boulder))
             {
                 Destroy(this.gameObject);
             }

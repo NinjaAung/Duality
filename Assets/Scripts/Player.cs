@@ -79,7 +79,7 @@ public class Player : MonoBehaviour {
         bool grabbedObject = false;
 
 		Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, m_Distance, m_ObstacleMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x *-1, m_Distance, m_ObstacleMask);
         //Checks if it's on the right or the left
         // May have to change code if the skelton affects the localScale.x value
         //RaycastHit2D rightRayHit = Physics2D.Raycast(transform.position, Vector2.right , m_Distance, m_ObstacleMask);
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour {
                 grabbedObject = true;
                 m_Obstacle = hit.collider.gameObject;
                 AttachObstacle(true);
-                Debug.Log("Should Pick Up");
+                //Debug.Log("Should Pick Up");
 
             }
             else if (grab == false)
@@ -151,16 +151,21 @@ public class Player : MonoBehaviour {
                 //    return;
                 //}
                 //Debug.Log(" Pulling to the left");
+                OnPull();
+
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PullingObject });
             }
             else if (objectOnRight && (horizontal == 1))
             {
                 //Debug.Log(" Pushing to the right");
+                OnPush();
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PushingObject });
             }
             else if (objectOnRight == false && horizontal == -1)
             {
-               // Debug.Log("Push to the left");
+                // Debug.Log("Push to the left");
+                OnPush();
+
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PushingObject});
 
             }
@@ -172,9 +177,19 @@ public class Player : MonoBehaviour {
                     return;
                 }
                 //Debug.Log(" Pulling to the right");
+                OnPull();
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PullingObject });
 
             }
+            else
+            {
+                DisableBothAnim();
+
+            }
+        }
+        else
+        {
+            DisableBothAnim();
         }
 
     }
@@ -184,15 +199,17 @@ public class Player : MonoBehaviour {
         if (attach)
         {
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = true });
-            m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
-            m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            m_Obstacle.GetComponent<Obstacle>().Grab(this);
+            //m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
+            //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
         else
         {
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = false });
-
-            m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
-            m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+            DisableBothAnim();
+            m_Obstacle.GetComponent<Obstacle>().Release(this);
+            //m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
+            //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
     
@@ -201,7 +218,7 @@ public class Player : MonoBehaviour {
         grab = _grab.grab;
         if (grab)
         {
-            Debug.Log("grab it hoe");
+            //Debug.Log("grab it hoe");
         }
         
     }
@@ -209,19 +226,38 @@ public class Player : MonoBehaviour {
     {
         //not necessary to use _jump in function, only here to use function in event system
         jump = true;
-        animator.SetBool("isJumping", true);
+        animator.SetBool("isJumping", jump);
     }
 
 	public void OnLanding() 
 	{
-		animator.SetBool("isJumping", false);
+        jump = false;
+		animator.SetBool("isJumping", jump);
 	} 
 
+    private void OnPush()
+    {
+        animator.SetBool("pull", false);
+        animator.SetBool("push", true);
+    }
+    private void OnPull()
+    {
+        animator.SetBool("push", false);
+        animator.SetBool("pull", true);
+    }
+
+    private void DisableBothAnim()
+    {
+        animator.SetBool("push", false);
+        animator.SetBool("pull", false);
+    }
+
+    /*
 	public void OnCrouch(bool isCrouching)
 	{
 		animator.SetBool("isCrouching",isCrouching);
 	}
-
+    */
     public void GetHorizontal(MovementInput _horiz)
     {
         horizontalMove = _horiz.movInput * runSpeed;

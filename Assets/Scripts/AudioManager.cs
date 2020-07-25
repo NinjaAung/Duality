@@ -6,7 +6,8 @@ using AmbientSounds;
 public class AudioManager : MonoBehaviour
 {
     [Header("Player Footprints")]
-    [SerializeField] private AudioClip[] m_FootstepSounds = new AudioClip[5];    // an array of footstep sounds that will be randomly selected from.
+    [SerializeField] private List<AudioClip> m_FootSteps;
+     //private AudioClip[] m_FootstepSounds = new AudioClip[5];    // an array of footstep sounds that will be randomly selected from.
 
     public Sequence Heartbeat;
 
@@ -29,6 +30,8 @@ public class AudioManager : MonoBehaviour
     public void Awake()
     {
         m_AudioSource = gameObject.GetComponent<AudioSource>();
+
+        m_FootSteps = new List<AudioClip>();
     }
 
     public void PlayFootStepAudio()
