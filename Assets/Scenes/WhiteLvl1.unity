@@ -6929,6 +6929,11 @@ PrefabInstance:
       propertyPath: m_UseMotor
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4127360814827730292, guid: c5f3fc711d81b314a8aac8a862870c7d,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 1.1131015
+      objectReference: {fileID: 0}
     - target: {fileID: 4127360814827730293, guid: c5f3fc711d81b314a8aac8a862870c7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6938,6 +6943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 3.2944455
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127360814827730293, guid: c5f3fc711d81b314a8aac8a862870c7d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4127360814827730298, guid: c5f3fc711d81b314a8aac8a862870c7d,
         type: 3}
