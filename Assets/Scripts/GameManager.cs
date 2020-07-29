@@ -40,6 +40,9 @@ public class World {
 
 public class GameManager: MonoBehaviour
 {
+    private static GameManager instance;
+    public Vector3 lastCheckpointPos;
+    
     #region World Switching Variables 
     //The Worlds are assigned in the inspcetor
     public World world1Push;
@@ -66,6 +69,14 @@ public class GameManager: MonoBehaviour
 
     private void Awake()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        } else {
+            Destroy(gameObject);
+        }
         currentWorld = Worlds.Push;
         //Setting the World 1 to be default on
         UpdatingWorldObjects(true);
