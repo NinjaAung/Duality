@@ -73,7 +73,8 @@ public class Obstacle : MonoBehaviour, IGrabbable
     {
         if (type.Equals(ObstacleType.Animated) == false)
         {
-            GetComponent<FixedJoint2D>().enabled = true;
+            //GetComponent<FixedJoint2D>().enabled = true;
+            GetComponent<Joint2D>().enabled = true;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
         else
@@ -90,7 +91,8 @@ public class Obstacle : MonoBehaviour, IGrabbable
     {
         if (type.Equals(ObstacleType.Animated) == false)
         {
-            GetComponent<FixedJoint2D>().enabled = false;
+            //GetComponent<FixedJoint2D>().enabled = false;
+            GetComponent<Joint2D>().enabled = false;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         }
 
@@ -120,7 +122,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
             {
                 case "TreeFallingLeft":
                     m_animationDuration = clip.length;
-                    Debug.Log(m_animationDuration);
+                    //Debug.Log(m_animationDuration);
                     break;
                 default:
                     break;

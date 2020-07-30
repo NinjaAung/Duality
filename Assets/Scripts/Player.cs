@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DualityES;
 
 
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour {
 	public bool grab = false;
 	bool dead = false;
 
+    private GameManager gm;
+
 
 
 
@@ -45,6 +48,13 @@ public class Player : MonoBehaviour {
 	[Range(0, 1), SerializeField] private float m_Distance = 1f;
 	[SerializeField] private LayerMask m_ObstacleMask; 
 	public GameObject m_Obstacle;
+
+
+    void Start()
+    {
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        transform.position = gm.lastCheckpointPos;
+    }
 	
 	public void OnEnable()
     {
@@ -75,6 +85,9 @@ public class Player : MonoBehaviour {
     }
 
 	void Update () {
+
+
+
 
         bool grabbedObject = false;
 
@@ -123,6 +136,10 @@ public class Player : MonoBehaviour {
         }
 
 		animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if(Input.GetKeyDown(KeyCode.R)){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
 	}
 
@@ -262,6 +279,7 @@ public class Player : MonoBehaviour {
     {
         horizontalMove = _horiz.movInput * runSpeed;
     }
+
 
 	void FixedUpdate ()
 	{
