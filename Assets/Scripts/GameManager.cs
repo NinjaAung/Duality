@@ -188,6 +188,11 @@ public class GameManager: MonoBehaviour
             }
             else
             {
+                while (m_Judgement > 10)
+                {
+                    m_Judgement -= currTimer * .0047f;
+                }
+                m_IncreaseRate = 0.01f;
                 cooldownPassed = true;
                 currTimer = 0;
             }
