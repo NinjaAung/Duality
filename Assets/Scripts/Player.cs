@@ -97,7 +97,7 @@ public class Player : MonoBehaviour {
         // May have to change code if the skelton affects the localScale.x value
         //RaycastHit2D rightRayHit = Physics2D.Raycast(transform.position, Vector2.right , m_Distance, m_ObstacleMask);
 		RaycastHit2D leftRayHit = Physics2D.Raycast(transform.position, Vector2.right * -1 , m_Distance, m_ObstacleMask);
-		Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
+		//Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
 
 	
 

@@ -9,9 +9,12 @@ public class BrittleWall : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ObstacleMovable"))
         {
-            if (collision.gameObject.GetComponent<Obstacle>().type.Equals(Obstacle.ObstacleType.Boulder))
+            if (collision.gameObject.GetComponent<Obstacle>())
             {
-                Destroy(this.gameObject);
+                if (collision.gameObject.GetComponent<Obstacle>().type.Equals(Obstacle.ObstacleType.Boulder))
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

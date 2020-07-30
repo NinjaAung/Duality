@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
 	private float slopeDownAngle;
     private float slopeSideAngle;
     private float lastSlopeAngle;
-	private bool canWalkOnSlope;
-	private bool isOnSlope;
+    [SerializeField] private bool canWalkOnSlope;
+    [SerializeField] private bool isOnSlope;
 
 	private Vector2 slopeNormalPerp;
 
@@ -97,8 +97,8 @@ public class PlayerController : MonoBehaviour
 
 	 private void SlopeCheckHorizontal(Vector2 checkPos)
     {
-        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, SlopeCheckDistance, m_WhatIsGround);
-        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, SlopeCheckDistance, m_WhatIsGround);
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(transform.position, transform.right, SlopeCheckDistance, m_WhatIsGround);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(transform.position, -transform.right, SlopeCheckDistance, m_WhatIsGround);
 
         if (slopeHitFront)
         {
@@ -123,11 +123,9 @@ public class PlayerController : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {      
-        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, SlopeCheckDistance, m_WhatIsGround);
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, SlopeCheckDistance, m_WhatIsGround);
         if (hit)
         {
-
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
 
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -155,10 +153,12 @@ public class PlayerController : MonoBehaviour
 
         if (isOnSlope && canWalkOnSlope && xInput == 0.0f)
         {
+            //Debug.Log("Setting sharedMaterial to full Friction");
             m_Rigidbody2D.sharedMaterial = fullFriction;
         }
         else
         {
+            //Debug.Log("Setting sharedMaterial to no Friction");
             m_Rigidbody2D.sharedMaterial = noFriction;
         }
     }
@@ -187,6 +187,7 @@ public class PlayerController : MonoBehaviour
 	#region Movement
 	public void Move(float move, bool crouch, bool jump)
 	{
+        xInput = move;
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
