@@ -52,13 +52,14 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        //gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gm = GameManager.Instance;
         transform.position = gm.lastCheckpointPos;
     }
 	
 	public void OnEnable()
     {
-        EventSystem.instance.AddListener<PlayerState>(ControllerToggle);
+        EventSystem.instance.AddListener<PlayerState>(UpdateDeathVar);
         EventSystem.instance.AddListener<JumpButton>(OnJump);
         EventSystem.instance.AddListener<GrabButton>(OnGrab);
         EventSystem.instance.AddListener<MovementInput>(GetHorizontal);
@@ -66,8 +67,7 @@ public class Player : MonoBehaviour {
     }
 
 
-
-    public void ControllerToggle(PlayerState playerDie)
+    public void UpdateDeathVar(PlayerState playerDie)
     {
         //isInControl = false;
         dead = playerDie.dead;
@@ -78,16 +78,13 @@ public class Player : MonoBehaviour {
 
     private void OnDisable()
     {
-       EventSystem.instance.RemoveListener<PlayerState>(ControllerToggle);
+       EventSystem.instance.RemoveListener<PlayerState>(UpdateDeathVar);
        EventSystem.instance.RemoveListener<JumpButton>(OnJump);
        EventSystem.instance.RemoveListener<GrabButton>(OnGrab);
        EventSystem.instance.RemoveListener<MovementInput>(GetHorizontal);
     }
 
 	void Update () {
-
-
-
 
         bool grabbedObject = false;
 
@@ -136,10 +133,15 @@ public class Player : MonoBehaviour {
         }
 
 		animator.SetFloat("speed", Mathf.Abs(horizontalMove));
-
-        if(Input.GetKeyDown(KeyCode.R)){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (dead)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                EventSystem.instance.RaiseEvent(new PlayerState { dead = false });
+            }
         }
+
 
 	}
 
@@ -292,6 +294,13 @@ public class Player : MonoBehaviour {
             controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         }
         jump = false;
-
+        if (horizontalMove == 0)
+        {
+            controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else
+        {
+            controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 }
