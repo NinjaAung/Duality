@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Sounds/Raw/SoundFiles/Background/Music/bensound-betterdays.mp3.meta
 guid: 0c289f5589b0f384d9fed6bb9df5f4bc
+=======
+guid: ad6b4d00e62a7ad4f9966fac99333b71
+>>>>>>> c42bb9948f3496af7dd2e4b65abe2a393cf20ac7:Assets/Sounds/Raw/SoundFiles/Background/20 meadow night ambience, crickets, ortf offset by 3 m, front - ORTF.wav.meta
+=======
+guid: 0c289f5589b0f384d9fed6bb9df5f4bc
+>>>>>>> c42bb9948f3496af7dd2e4b65abe2a393cf20ac7
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6

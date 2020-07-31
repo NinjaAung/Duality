@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Sounds/Raw/SoundFiles/Background/Music/bensound-november.mp3.meta
-guid: 880cd61b69b836b45b22d026f6bf3f01
-=======
-guid: df05c7a396d795f4bb4dbfca263360d1
->>>>>>> c42bb9948f3496af7dd2e4b65abe2a393cf20ac7:Assets/Sounds/Raw/SoundFiles/Background/BackGroundSounds/01 Seawash, Calm.wav.meta
-=======
-guid: 880cd61b69b836b45b22d026f6bf3f01
->>>>>>> c42bb9948f3496af7dd2e4b65abe2a393cf20ac7
+guid: a92c24235d33d4c4682cc7eac421ff0f
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
