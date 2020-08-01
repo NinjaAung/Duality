@@ -40,7 +40,7 @@ public class World {
 
 public class GameManager: MonoBehaviour
 {
-    private static GameManager instance;
+    private static GameManager _instance;
     public Vector3 lastCheckpointPos;
     
     #region World Switching Variables 
@@ -67,13 +67,26 @@ public class GameManager: MonoBehaviour
 
     public bool pause;
 
+
+    public static GameManager Instance //Ensures that this is the only instance in the class
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new GameManager();
+            }
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
 
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(instance);
+            _instance = this;
+            DontDestroyOnLoad(_instance);
         } else {
             Destroy(gameObject);
         }
@@ -96,6 +109,8 @@ public class GameManager: MonoBehaviour
 
         EventSystem.instance.AddListener<PauseGame>(Pause);
 
+        EventSystem.instance.AddListener<PlayerState>(OnReloadScene);
+
     }
 
     private void OnDisable()
@@ -103,6 +118,8 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<WorldSwitchButton>(OnWorldSwitch);
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
         EventSystem.instance.RemoveListener<ObjectContact>(NonNativeResponse);
+
+        EventSystem.instance.RemoveListener<PlayerState>(OnReloadScene);
 
     }
 
@@ -276,6 +293,21 @@ public class GameManager: MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+    }
+
+    void OnReloadScene(PlayerState dead)
+    {
+        /*
+        if (dead.dead ==false)
+        {
+            //HORRIBLE CODING 
+            //ONLY DOING THIS B/C NINJA DIDN'T ACTUALLY CODE A SAVE SYSTEM
+            //And the inspector values get destroyed
+            world1Push.m_World = GameObject.Find("PushWrld");
+            world2Pull.m_World = GameObject.Find("PullWrld");
+        }
+        */
+
     }
 
 }

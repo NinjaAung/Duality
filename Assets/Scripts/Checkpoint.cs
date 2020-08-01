@@ -7,7 +7,7 @@ public class Checkpoint : MonoBehaviour
     private GameManager gm;
 
     void Start(){
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gm = GameManager.Instance;
     }
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){

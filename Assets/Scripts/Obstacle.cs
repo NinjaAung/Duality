@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualityES;
 
 public interface IGrabbable
 {
@@ -59,14 +60,21 @@ public class Obstacle : MonoBehaviour, IGrabbable
             }
         }
     }
+
     void Start()
     {
+        //This doesn't work and it bothers me but yes
+        //Debug.Log(ObstacleManager.Instance.Obstacles);
+        //ObstacleManager.Instance.AddObstacle(gameObject);
+
+
         if (type.Equals(ObstacleType.Animated))
         {
             GetAnimationDuration();
 
         }
     }
+
 
 
     public void Grab(Player player)
