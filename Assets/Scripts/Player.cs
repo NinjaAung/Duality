@@ -138,7 +138,7 @@ public class Player : MonoBehaviour {
 		    //}
 
         //Grab 
-        if(hit.collider != null)
+        if(hit.collider != null && controller.m_Grounded)
         {
             if (hit.collider.gameObject.tag == "ObstacleMovable" && grab)
             {
@@ -288,11 +288,13 @@ public class Player : MonoBehaviour {
     {
         animator.SetBool("pull", false);
         animator.SetBool("push", true);
+        animator.SetBool("isJumping", false);
     }
     private void OnPull()
     {
         animator.SetBool("push", false);
         animator.SetBool("pull", true);
+        animator.SetBool("isJumping", false);
     }
 
     private void DisableBothAnim()
@@ -318,6 +320,7 @@ public class Player : MonoBehaviour {
         if (grab)
         {
             jump = false;
+            animator.SetBool("isJumping", false);
         }
         if (dead == false)
         {
