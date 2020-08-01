@@ -34,6 +34,10 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
     public ObstacleType type = ObstacleType.Regular;
 
+    private Rigidbody2D rb;
+
+    private Joint2D joint;
+
     public bool GetPushable()
     {
         return m_Pushable;
@@ -45,20 +49,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
     public void Awake()
     {
-        if(GetComponent<Animator>() != null)
-        {
-            animator = GetComponent<Animator>();
-        }
-        if(type == ObstacleType.Animated)
-        {
-            foreach(Transform child in transform)
-            {
-                if (child.CompareTag("Detachable"))
-                {
-                    DetachableObject = child.gameObject;
-                }
-            }
-        }
+
     }
 
     void Start()
@@ -67,14 +58,45 @@ public class Obstacle : MonoBehaviour, IGrabbable
         //Debug.Log(ObstacleManager.Instance.Obstacles);
         //ObstacleManager.Instance.AddObstacle(gameObject);
 
+        if (GetComponent<Animator>() != null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        if (type == ObstacleType.Animated)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.CompareTag("Detachable"))
+                {
+                    DetachableObject = child.gameObject;
+                }
+            }
+        }
 
         if (type.Equals(ObstacleType.Animated))
         {
             GetAnimationDuration();
 
         }
-    }
+        else
+        {
+            rb = GetComponent<Rigidbody2D>();
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
+            joint = GetComponent<Joint2D>();
+
+            if (transform.root == GameManager.Instance.world1Push.m_World.transform)
+            {
+                joint.connectedBody = GameManager.Instance.playerPush.rb;
+
+            }
+            else
+            {
+                joint.connectedBody = GameManager.Instance.playerPull.rb;
+            }
+        }
+        
+    }
 
 
     public void Grab(Player player)
@@ -82,8 +104,8 @@ public class Obstacle : MonoBehaviour, IGrabbable
         if (type.Equals(ObstacleType.Animated) == false)
         {
             //GetComponent<FixedJoint2D>().enabled = true;
-            GetComponent<Joint2D>().enabled = true;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            joint.enabled = true;
+            rb.constraints = RigidbodyConstraints2D.None;
         }
         else
         {
@@ -100,8 +122,8 @@ public class Obstacle : MonoBehaviour, IGrabbable
         if (type.Equals(ObstacleType.Animated) == false)
         {
             //GetComponent<FixedJoint2D>().enabled = false;
-            GetComponent<Joint2D>().enabled = false;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+            joint.enabled = false;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
 
     }
@@ -110,15 +132,29 @@ public class Obstacle : MonoBehaviour, IGrabbable
     {
         Debug.Log("TestWhenAnimationFinish");
         Vector3 temp = DetachableObject.transform.position;
-        Vector3 temp2 = DetachableObject.transform.localPosition;
+        Quaternion tempRot = DetachableObject.transform.rotation;
+        Vector3 tempScale = DetachableObject.transform.localScale;
+
+        //Vector3 temp2 = DetachableObject.transform.localPosition;
 
 
-        //DetachableObject.transform.parent = transform.parent;
-        //DetachableObject.transform.position = temp2;
+        DetachableObject.transform.parent = null;
+        float playbackTime = animator.playbackTime;
+
+        animator.Rebind();
+        animator.playbackTime = playbackTime;
+
+        DetachableObject.transform.parent = gameObject.transform.parent;
+
+        DetachableObject.transform.position = temp;
+        DetachableObject.transform.rotation= tempRot;
+        DetachableObject.transform.localScale = tempScale;
         //DetachableObject.transform.position.z = 14f;
 
         DetachableObject.tag = "ObstacleMovable";
         var ObsCompnent = DetachableObject.GetComponent<Obstacle>();
+        DetachableObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+
         ObsCompnent.enabled = true;
     }
     void GetAnimationDuration()

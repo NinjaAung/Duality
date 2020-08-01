@@ -49,12 +49,32 @@ public class Player : MonoBehaviour {
 	[SerializeField] private LayerMask m_ObstacleMask; 
 	public GameObject m_Obstacle;
 
+    [HideInInspector]public Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
+
         //gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        gm = GameManager.Instance;
-        transform.position = gm.lastCheckpointPos;
+        //gm = GameManager.Instance;
+        if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
+        {
+            if (CheckpointSystem.pullLastCheckpointPos != null)
+            {
+                transform.position = CheckpointSystem.pullLastCheckpointPos.Value;
+            }
+        }
+        else
+        {
+            if (CheckpointSystem.pushLastCheckpointPos != null)
+            {
+                transform.position = CheckpointSystem.pushLastCheckpointPos.Value;
+            }
+        }
     }
 	
 	public void OnEnable()
@@ -89,11 +109,21 @@ public class Player : MonoBehaviour {
         bool grabbedObject = false;
 
 		Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x *-1, m_Distance, m_ObstacleMask);
+        Vector3 temp = transform.localScale.normalized;
+        RaycastHit2D hit;
+        if (transform.root == GameManager.Instance.world1Push.m_World.transform)
+        {
+            hit = Physics2D.Raycast(transform.position, Vector2.right * temp.x * -1, m_Distance, m_ObstacleMask);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(transform.position, Vector2.right * temp.x , m_Distance, m_ObstacleMask);
+        }
+        Debug.DrawRay(transform.position, Vector2.right * temp.x *-1, Color.red);
         //Checks if it's on the right or the left
         // May have to change code if the skelton affects the localScale.x value
         //RaycastHit2D rightRayHit = Physics2D.Raycast(transform.position, Vector2.right , m_Distance, m_ObstacleMask);
-		RaycastHit2D leftRayHit = Physics2D.Raycast(transform.position, Vector2.right * -1 , m_Distance, m_ObstacleMask);
+        RaycastHit2D leftRayHit = Physics2D.Raycast(transform.position, Vector2.right * -1 , m_Distance, m_ObstacleMask);
 		//Debug.DrawRay(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * m_Distance, Color.red);
 
 	
@@ -137,7 +167,7 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 EventSystem.instance.RaiseEvent(new PlayerState { dead = false });
             }
         }

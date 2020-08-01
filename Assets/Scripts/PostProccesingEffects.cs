@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualityES;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PostProccesingEffects : MonoBehaviour
 {
-    public PostProcessVolume volume;
+    //public PostProcessVolume volume;
+
+
+
+    public Volume volume;
 
     [Header("Judgment Vignette"), Space(2)]
     public float score;
-    public float _intensity;
+    //public float _intensity;
 
 
-    private Vignette _Vignette;
+    [SerializeField]private UnityEngine.Rendering.Universal.Vignette _Vignette;
 
     public void Awake()
     {
@@ -34,7 +40,14 @@ public class PostProccesingEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        volume.profile.TryGetSettings(out _Vignette);
+        /*
+        UnityEngine.Rendering.VolumeProfile volumeProfile = volume?.profile;
+        if (!volumeProfile) throw new System.NullReferenceException(nameof(UnityEngine.Rendering.VolumeProfile));
+
+
+        if (!volumeProfile.TryGet(out _Vignette)) throw new System.NullReferenceException(nameof(_Vignette));
+        */
+        volume.profile.TryGet(out _Vignette);
 
     }
 
@@ -43,7 +56,7 @@ public class PostProccesingEffects : MonoBehaviour
     {
         //score = score + _intensity * Time.time;
 
-        _Vignette.intensity.value = score;
+        _Vignette.intensity.Override(score);
 
     }
     // Found online haven't tested mapping function yet 

@@ -41,7 +41,6 @@ public class World {
 public class GameManager: MonoBehaviour
 {
     private static GameManager _instance;
-    public Vector3 lastCheckpointPos;
     
     #region World Switching Variables 
     //The Worlds are assigned in the inspcetor
@@ -68,6 +67,11 @@ public class GameManager: MonoBehaviour
     public bool pause;
 
 
+    public Player playerPush;
+    public Player playerPull;
+
+
+    #region Singleton
     public static GameManager Instance //Ensures that this is the only instance in the class
     {
         get
@@ -79,6 +83,8 @@ public class GameManager: MonoBehaviour
             return _instance;
         }
     }
+    #endregion
+
 
     private void Awake()
     {
@@ -86,7 +92,6 @@ public class GameManager: MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(_instance);
         } else {
             Destroy(gameObject);
         }
@@ -97,6 +102,11 @@ public class GameManager: MonoBehaviour
         if(world1Push == null||world2Pull == null)
         {
             Debug.LogError("Unassgined World Variable");
+        }
+
+        if(playerPull == null||playerPush == null)
+        {
+            Debug.LogError("Unassigned Player Variable");
         }
 
         //Listening to the Input Manager
@@ -191,6 +201,10 @@ public class GameManager: MonoBehaviour
     // }
 
 
+
+    float tempOrginalValue;
+
+
     #region World Switching Functions
     void WSCooldownTimer()
     {
@@ -199,16 +213,14 @@ public class GameManager: MonoBehaviour
             if (currTimer < m_WorldSwitchCooldownTimer)
             {
                 currTimer += Time.deltaTime;
-//                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
-                m_Judgement -= currTimer * .0047f;
+                //                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
+                //m_Judgement -= currTimer * .0047f;
+                m_Judgement = Mathf.Lerp(tempOrginalValue, 0, currTimer / m_WorldSwitchCooldownTimer);
+
                 EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement });
             }
             else
             {
-                while (m_Judgement > 10)
-                {
-                    m_Judgement -= currTimer * .0047f;
-                }
                 m_IncreaseRate = 0.01f;
                 cooldownPassed = true;
                 currTimer = 0;
@@ -225,6 +237,7 @@ public class GameManager: MonoBehaviour
         {
             m_IncreaseRate = 0.1f;
             cooldownPassed = false;
+            tempOrginalValue = m_Judgement;
             switch (currentWorld)
             {
                 case Worlds.Push:
