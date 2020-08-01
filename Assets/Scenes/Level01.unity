@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 28570287}
   - component: {fileID: 28570286}
   - component: {fileID: 28570285}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 64414183}
   - component: {fileID: 64414182}
   - component: {fileID: 64414181}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6660,7 +6660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 237537626}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21212,6 +21212,7 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_Grounded: 0
   m_Rigidbody2D: {fileID: 0}
 --- !u!70 &870351795
 CapsuleCollider2D:
@@ -28951,7 +28952,7 @@ GameObject:
   - component: {fileID: 1150241052}
   - component: {fileID: 1150241051}
   - component: {fileID: 1150241050}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30118,6 +30119,7 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_Grounded: 0
   m_Rigidbody2D: {fileID: 0}
 --- !u!70 &1209709006
 CapsuleCollider2D:
@@ -34543,7 +34545,7 @@ GameObject:
   - component: {fileID: 1395484469}
   - component: {fileID: 1395484468}
   - component: {fileID: 1395484467}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
