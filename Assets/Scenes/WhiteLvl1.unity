@@ -4645,6 +4645,7 @@ GameObject:
   - component: {fileID: 968935216}
   - component: {fileID: 968935217}
   - component: {fileID: 968935213}
+  - component: {fileID: 968935218}
   m_Layer: 14
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4664,9 +4665,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1016640557c439fbd7128577e67596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: {fileID: 968935210}
+  volume: {fileID: 0}
   score: 0
-  _intensity: 0.0001
+  _Vignette: {fileID: 0}
 --- !u!114 &968935210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4886,6 +4887,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PushWorld1Cam: {fileID: 1209509848}
   PullWorld2Cam: {fileID: 130010251}
+--- !u!114 &968935218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968935208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1072265590
 GameObject:
   m_ObjectHideFlags: 0
@@ -5251,6 +5283,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   m_Obstacle: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!1 &1159107573
 GameObject:
   m_ObjectHideFlags: 0
@@ -5515,7 +5548,6 @@ GameObject:
   - component: {fileID: 1277035384}
   - component: {fileID: 1277035383}
   - component: {fileID: 1277035382}
-  - component: {fileID: 1277035385}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -5535,7 +5567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8561354781d4be8ae700d4a9e9a54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastCheckpointPos: {x: -3.77, y: 1, z: 14}
   world1Push:
     m_World: {fileID: 669217146}
     isActive: 0
@@ -5549,6 +5580,8 @@ MonoBehaviour:
   m_IncreaseRate: 0.01
   m_JudgementOverloadValue: 70
   pause: 0
+  playerPush: {fileID: 0}
+  playerPull: {fileID: 0}
 --- !u!114 &1277035383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5575,21 +5608,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1277035385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277035381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 954015c7104c79a4a9c161bb82379b37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Obstacles: []
-  m_OrignalPositions: []
-  m_ObjectsIsEnabled: 
 --- !u!1 &1287917880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,7 +6205,7 @@ GameObject:
   - component: {fileID: 1519123596}
   - component: {fileID: 1519123599}
   - component: {fileID: 1519123598}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6693,7 +6711,7 @@ GameObject:
   - component: {fileID: 1801803182}
   - component: {fileID: 1801803181}
   - component: {fileID: 1801803180}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Checkpoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
