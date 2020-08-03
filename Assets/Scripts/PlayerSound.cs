@@ -6,10 +6,10 @@ public class PlayerSound : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private List<AudioClip> m_FootSteps = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> m_Jumping = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> m_Landing = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> m_Pushing = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> m_Pulling = new List<AudioClip>();
+    [SerializeField] private AudioClip m_Landing;
+    [SerializeField] private AudioClip m_Jumping;
+    [SerializeField] private AudioClip m_Pushing;
+    [SerializeField] private AudioClip m_Pulling;
     
     public AudioSource audioSrc;
 
@@ -27,22 +27,22 @@ public class PlayerSound : MonoBehaviour
 
     void walking()
     {
-        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
+        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.30f,0.50f));
     }
     void jumping()
     {
-        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
+        audioSrc.PlayOneShot(m_Jumping, 0.5f);
     }
     void landing()
     {
-        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
+        audioSrc.PlayOneShot(m_Landing);
     }
     void pushing()
     {
-        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
+        audioSrc.PlayOneShot(m_Pushing);
     }
     void pulling()
     {
-        audioSrc.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
+        audioSrc.PlayOneShot(m_Pulling);
     }
 }
