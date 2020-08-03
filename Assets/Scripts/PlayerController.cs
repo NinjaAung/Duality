@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 slopeNormalPerp;
 	#endregion
 
+	#region Events
 	[Header("Events"), Space(2)]
 
 	public UnityEvent OnLandEvent;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
-
+	#endregion
 
 	const float k_GroundedRadius = 0.2f; 					// Radius of the overlap circle to determine if grounded
 	public bool m_Grounded;            					// Whether or not the player is grounded.
@@ -63,6 +64,10 @@ public class PlayerController : MonoBehaviour
 	private Vector2 ColliderSize;
 
     private bool m_grabbing;
+
+	public AudioSource audioSource;
+	private List<AudioClip> m_FootSteps = new List<AudioClip>();
+	
 #endregion
     private void OnEnable()
     {
@@ -260,8 +265,9 @@ public class PlayerController : MonoBehaviour
 
             if(m_Grounded && Mathf.Abs(move)  > 0)
             {
-                //AudioManager.instance.PlayFootStepAudio(m_Grounded);
+				//audioSource.PlayOneShot(m_FootSteps[Random.Range(0,2)], Random.Range(0.50f,0.80f));
 
+                //AudioManager.instance.PlayFootStepAudio(m_Grounded);
 				//AudioManager.instance.StopFootStepAudio();
             }
         }

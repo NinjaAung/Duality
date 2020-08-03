@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 
 
 
-	[Header("Grab & Pull"), Space(2)]
+    [Header("Grab & Pull"), Space(2)]
 	[Range(0, 1), SerializeField] private float m_Distance = 1f;
 	[SerializeField] private LayerMask m_ObstacleMask; 
 	public GameObject m_Obstacle;
