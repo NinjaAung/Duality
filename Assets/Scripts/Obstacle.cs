@@ -23,6 +23,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
     [SerializeField] private bool m_Pushable;
     [SerializeField] private bool m_Pullable;
+    [SerializeField] private bool isBox;
 
 
     private Animator animator;
@@ -80,8 +81,17 @@ public class Obstacle : MonoBehaviour, IGrabbable
         }
         else
         {
+            
             rb = GetComponent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
+            if (isBox) 
+            {
+                Debug.Log("This is a box");
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            } else
+            {
+               Debug.Log("This is not a box") ;
+            }
 
             joint = GetComponent<Joint2D>();
 
@@ -123,7 +133,10 @@ public class Obstacle : MonoBehaviour, IGrabbable
         {
             //GetComponent<FixedJoint2D>().enabled = false;
             joint.enabled = false;
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            if (isBox)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            }
         }
 
     }
