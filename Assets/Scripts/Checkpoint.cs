@@ -5,7 +5,10 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [Header("Particle")]
-    public ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particleSystem;
+    [Header("Sound")]
+    [SerializeField] private AudioSource audioSrc;
+
     void Start()
     {
         if (particleSystem.isPlaying){
@@ -18,6 +21,10 @@ public class Checkpoint : MonoBehaviour
             Debug.Log("Enabiling Effect");
             particleSystem.Play();
             //gm.lastCheckpointPos = transform.position;
+            if (audioSrc.isPlaying) {
+                return;
+            }
+            audioSrc.Play();
             if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
             {
                 CheckpointSystem.pullLastCheckpointPos = other.gameObject.transform.position;
