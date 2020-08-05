@@ -4,40 +4,19 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    private ParticleSystem[] childrenParticleSytems;
-    bool disabledRelevantPSEmissions = true;
-
+    [Header("Particle")]
+    public ParticleSystem particleSystem;
     void Start()
     {
-        childrenParticleSytems = gameObject.GetComponentsInChildren<ParticleSystem>();
-    }
-
-    void Update()
-    {
-         // Process each child's particle system and disable its emission module.
-         // For each child, we disable all emission modules of its children.
-        if( disabledRelevantPSEmissions )
-        {
-            foreach( ParticleSystem childPS in childrenParticleSytems )
-            {
-                // Get the emission module of the current child particle system [childPS].
-                ParticleSystem.EmissionModule childPSEmissionModule = childPS.emission;
-                // Disable the child's emission module.
-                childPSEmissionModule.enabled = false;
-            }
+        if (particleSystem.isPlaying){
+            particleSystem.Stop();
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player") && other.GetComponent<Player>()){
             Debug.Log("Enabiling Effect");
-            foreach( ParticleSystem childPS in childrenParticleSytems )
-            {
-                // Get the emission module of the current child particle system [childPS].
-                ParticleSystem.EmissionModule childPSEmissionModule = childPS.emission;
-                // Disable the child's emission module.
-                childPSEmissionModule.enabled = true;
-            }
+            particleSystem.Play();
             //gm.lastCheckpointPos = transform.position;
             if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
             {
