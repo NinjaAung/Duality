@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AmbientSounds;
+using DualityES;
 
 public class AudioManager : MonoBehaviour
 {
     [Header("Player Footprints")]
     [SerializeField] private List<AudioClip> m_FootSteps;
+    public AudioSource JudgmentSrc;
+    [Range(0,1)] public float JudgmentStart;
     private AudioClip[] m_FootstepSounds = new AudioClip[5];    // an array of footstep sounds that will be randomly selected from.
-
+    
     public Sequence Heartbeat;
 
     public AudioSource m_AudioSource;
 
     private static AudioManager _instance = null;
+
+    public float judgmentVolume;
 
     //Ensures that this is the only instance in the class
     public static AudioManager instance
@@ -30,9 +35,35 @@ public class AudioManager : MonoBehaviour
 
     public void Awake()
     {
+        EventSystem.instance.AddListener<Judgment>(OnJudgment);
         m_AudioSource = gameObject.GetComponent<AudioSource>();
 
         //m_FootSteps = new List<AudioClip>();
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.instance.RemoveListener<Judgment>(OnJudgment);
+    }
+
+
+    void OnJudgment(Judgment judgmentData)
+    {
+        judgmentVolume = judgmentData.JudgmentScore;
+    }
+
+
+
+    void Update()
+    {
+        if (judgmentVolume >= JudgmentStart) {
+            if (JudgmentSrc.isPlaying)
+            {
+                JudgmentSrc.volume = judgmentVolume;
+                return;
+            }
+            JudgmentSrc.Play();
+        }
     }
 
     public void PlayFootStepAudio(bool isGrounded)
