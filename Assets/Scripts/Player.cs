@@ -248,7 +248,10 @@ public class Player : MonoBehaviour {
         if (attach)
         {
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = true });
-            m_Obstacle.GetComponent<Obstacle>().Grab(this);
+            if (m_Obstacle.GetComponent<Obstacle>())
+            {
+                m_Obstacle.GetComponent<Obstacle>().Grab(this);
+            }
             //m_Obstacle.GetComponent<FixedJoint2D>().enabled = true;
             //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
@@ -256,7 +259,10 @@ public class Player : MonoBehaviour {
         {
             EventSystem.instance.RaiseEvent(new GrabbingObject { grabbing = false });
             DisableBothAnim();
-            m_Obstacle.GetComponent<Obstacle>().Release(this);
+            if (m_Obstacle.GetComponent<Obstacle>())
+            {
+                m_Obstacle.GetComponent<Obstacle>().Release(this);
+            }
             //m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
             //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         }
