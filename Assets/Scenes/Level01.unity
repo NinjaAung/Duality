@@ -45779,7 +45779,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 915848013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e1f148658201547ace804194cb6f42, type: 3}
+  m_Script: {fileID: 11500000, guid: 03cccc7a621e8224c920ab854ef30a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &915848016
@@ -51408,7 +51408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FootSteps: []
   JudgmentSrc: {fileID: 1138973635}
-  JudgmentStart: 0
+  JudgmentStart: 0.05
   Heartbeat: {fileID: 11400000, guid: 29ed256a73944a44eb7ef5bd244d8cd4, type: 2}
   m_AudioSource: {fileID: 1111453574}
   judgmentVolume: 0
