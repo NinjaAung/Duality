@@ -10,7 +10,8 @@ namespace DualityES {
     public class EventSystem {
         private static EventSystem _instance = null;
 
-        public static EventSystem instance //Ensures that this is the only instance in the class
+        //Ensures that this is the only instance in the class
+        public static EventSystem instance 
         {
             get
             {

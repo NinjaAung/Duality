@@ -14,6 +14,12 @@ public class WorldSwitching : DualityES.Event
     public Worlds targetWorld;
 }
 
+
+public class OnNonNativeEvent : DualityES.Event
+{
+
+}
+
 public enum Worlds
 {
     Push,
@@ -173,6 +179,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Push)
             {
                 m_IncreaseRate += 0.02f;
+                EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
             }
         }
@@ -181,6 +188,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Pull)
             {
                 m_IncreaseRate += 0.02f;
+                EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
 
             }

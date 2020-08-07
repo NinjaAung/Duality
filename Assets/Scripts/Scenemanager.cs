@@ -10,6 +10,11 @@ public class SceneLoadNext : DualityES.Event
 
 }
 
+public class ResetGameScene : DualityES.Event
+{
+
+}
+
 public class Scenemanager : MonoBehaviour
 {
     #region Singleton
@@ -27,16 +32,24 @@ public class Scenemanager : MonoBehaviour
     }
     #endregion
 
-    public int sceneIndex = 0;
+    private int sceneIndex = 0;
 
     private void Awake()
     {
         EventSystem.instance.AddListener<SceneLoadNext>(NextScene);
+        EventSystem.instance.AddListener<ResetGameScene>(MainMenuScene);
         DontDestroyOnLoad(this.gameObject);//So it presist throughout the game
 
+
+    }
+
+    private void Start()
+    {
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
     private void OnDisable()
     {
+        EventSystem.instance.RemoveListener<ResetGameScene>(MainMenuScene);
         EventSystem.instance.RemoveListener<SceneLoadNext>(NextScene);
     }
 
@@ -48,7 +61,10 @@ public class Scenemanager : MonoBehaviour
         SceneManager.LoadScene(temp);
         sceneIndex++;
     }
-
+    public void MainMenuScene(ResetGameScene reset)
+    {
+        SceneManager.LoadScene(1);
+    }
 
 
 

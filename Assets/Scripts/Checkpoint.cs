@@ -8,6 +8,8 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem;
     [Header("Sound")]
     [SerializeField] private AudioSource audioSrc;
+    bool isChecked = false;
+
 
     void Start()
     {
@@ -15,10 +17,20 @@ public class Checkpoint : MonoBehaviour
             particleSystem.Stop();
         }
     }
-
+    private void OnEnable()
+    {
+        if (isChecked == false)
+        {
+            if (particleSystem.isPlaying)
+            {
+                particleSystem.Stop();
+            }
+        }
+    }
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player") && other.GetComponent<Player>()){
             Debug.Log("Enabiling Effect");
+            isChecked = true;
             particleSystem.Play();
             //gm.lastCheckpointPos = transform.position;
             if (audioSrc.isPlaying) {
