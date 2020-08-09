@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ObstacleMovable
   - Detachable
+  - ObstacleMovable_Circle
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ground
   - Player
   - Obstacles
-  - 
+  - Checkpoints
   - Camera
   - 
   - 

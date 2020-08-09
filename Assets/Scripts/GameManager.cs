@@ -14,6 +14,12 @@ public class WorldSwitching : DualityES.Event
     public Worlds targetWorld;
 }
 
+
+public class OnNonNativeEvent : DualityES.Event
+{
+
+}
+
 public enum Worlds
 {
     Push,
@@ -40,8 +46,7 @@ public class World {
 
 public class GameManager: MonoBehaviour
 {
-    private static GameManager instance;
-    public Vector3 lastCheckpointPos;
+    private static GameManager _instance;
     
     #region World Switching Variables 
     //The Worlds are assigned in the inspcetor
@@ -67,13 +72,32 @@ public class GameManager: MonoBehaviour
 
     public bool pause;
 
+
+    public Player playerPush;
+    public Player playerPull;
+
+
+    #region Singleton
+    public static GameManager Instance //Ensures that this is the only instance in the class
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new GameManager();
+            }
+            return _instance;
+        }
+    }
+    #endregion
+
+
     private void Awake()
     {
 
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(instance);
+            _instance = this;
         } else {
             Destroy(gameObject);
         }
@@ -86,6 +110,11 @@ public class GameManager: MonoBehaviour
             Debug.LogError("Unassgined World Variable");
         }
 
+        if(playerPull == null||playerPush == null)
+        {
+            Debug.LogError("Unassigned Player Variable");
+        }
+
         //Listening to the Input Manager
         //On World Switch starts the other event that alerts the other listeners
         EventSystem.instance.AddListener<WorldSwitchButton>(OnWorldSwitch);
@@ -96,6 +125,8 @@ public class GameManager: MonoBehaviour
 
         EventSystem.instance.AddListener<PauseGame>(Pause);
 
+        EventSystem.instance.AddListener<PlayerState>(OnReloadScene);
+
     }
 
     private void OnDisable()
@@ -103,6 +134,8 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<WorldSwitchButton>(OnWorldSwitch);
         EventSystem.instance.RemoveListener<WorldSwitching>(WorldSwitch);
         EventSystem.instance.RemoveListener<ObjectContact>(NonNativeResponse);
+
+        EventSystem.instance.RemoveListener<PlayerState>(OnReloadScene);
 
     }
 
@@ -146,6 +179,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Push)
             {
                 m_IncreaseRate += 0.02f;
+                EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
             }
         }
@@ -154,6 +188,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Pull)
             {
                 m_IncreaseRate += 0.02f;
+                EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
 
             }
@@ -174,6 +209,10 @@ public class GameManager: MonoBehaviour
     // }
 
 
+
+    float tempOrginalValue;
+
+
     #region World Switching Functions
     void WSCooldownTimer()
     {
@@ -182,16 +221,14 @@ public class GameManager: MonoBehaviour
             if (currTimer < m_WorldSwitchCooldownTimer)
             {
                 currTimer += Time.deltaTime;
-//                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
-                m_Judgement -= currTimer * .0047f;
+                //                Debug.Log(currTimer / m_WorldSwitchCooldownTimer);
+                //m_Judgement -= currTimer * .0047f;
+                m_Judgement = Mathf.Lerp(tempOrginalValue, 0, currTimer / m_WorldSwitchCooldownTimer);
+
                 EventSystem.instance.RaiseEvent(new Judgment { JudgmentScore = m_Judgement });
             }
             else
             {
-                while (m_Judgement > 10)
-                {
-                    m_Judgement -= currTimer * .0047f;
-                }
                 m_IncreaseRate = 0.01f;
                 cooldownPassed = true;
                 currTimer = 0;
@@ -208,6 +245,7 @@ public class GameManager: MonoBehaviour
         {
             m_IncreaseRate = 0.1f;
             cooldownPassed = false;
+            tempOrginalValue = m_Judgement;
             switch (currentWorld)
             {
                 case Worlds.Push:
@@ -276,6 +314,21 @@ public class GameManager: MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+    }
+
+    void OnReloadScene(PlayerState dead)
+    {
+        /*
+        if (dead.dead ==false)
+        {
+            //HORRIBLE CODING 
+            //ONLY DOING THIS B/C NINJA DIDN'T ACTUALLY CODE A SAVE SYSTEM
+            //And the inspector values get destroyed
+            world1Push.m_World = GameObject.Find("PushWrld");
+            world2Pull.m_World = GameObject.Find("PullWrld");
+        }
+        */
+
     }
 
 }

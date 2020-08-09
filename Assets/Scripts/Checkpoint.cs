@@ -4,14 +4,48 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    private GameManager gm;
+    [Header("Particle")]
+    [SerializeField] private ParticleSystem particleSystem;
+    [Header("Sound")]
+    [SerializeField] private AudioSource audioSrc;
+    bool isChecked = false;
 
-    void Start(){
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+    void Start()
+    {
+        if (particleSystem.isPlaying){
+            particleSystem.Stop();
+        }
+    }
+    private void OnEnable()
+    {
+        if (isChecked == false)
+        {
+            if (particleSystem.isPlaying)
+            {
+                particleSystem.Stop();
+            }
+        }
     }
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Player")){
-            gm.lastCheckpointPos = transform.position;
+        if(other.CompareTag("Player") && other.GetComponent<Player>()){
+            Debug.Log("Enabiling Effect");
+            isChecked = true;
+            particleSystem.Play();
+            //gm.lastCheckpointPos = transform.position;
+            if (audioSrc.isPlaying) {
+                return;
+            }
+            audioSrc.Play();
+            if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
+            {
+                CheckpointSystem.pullLastCheckpointPos = other.gameObject.transform.position;
+                
+            }
+            else
+            {
+                CheckpointSystem.pushLastCheckpointPos = other.gameObject.transform.position;
+            }
         }
     } 
 }
