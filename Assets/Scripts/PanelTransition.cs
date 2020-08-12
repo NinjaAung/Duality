@@ -77,7 +77,7 @@ public class PanelTransition : MonoBehaviour
             yield return null;
         }
 
-        //EventSystem.instance.RaiseEvent(new SceneLoadNext { });
+        EventSystem.instance.RaiseEvent(new SceneLoadNext { });
 
     }
     public void FadeInText(float timeSpeed = -1.0f)
