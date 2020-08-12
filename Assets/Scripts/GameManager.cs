@@ -127,6 +127,8 @@ public class GameManager: MonoBehaviour
 
         EventSystem.instance.AddListener<PlayerState>(OnReloadScene);
 
+        EventSystem.instance.AddListener<SceneLoadNext>(ClearCheckpoint);
+
     }
 
     private void OnDisable()
@@ -136,6 +138,10 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.RemoveListener<ObjectContact>(NonNativeResponse);
 
         EventSystem.instance.RemoveListener<PlayerState>(OnReloadScene);
+
+        EventSystem.instance.RemoveListener<PauseGame>(Pause);
+
+        EventSystem.instance.RemoveListener<SceneLoadNext>(ClearCheckpoint);
 
     }
 
@@ -318,17 +324,16 @@ public class GameManager: MonoBehaviour
 
     void OnReloadScene(PlayerState dead)
     {
-        /*
-        if (dead.dead ==false)
-        {
-            //HORRIBLE CODING 
-            //ONLY DOING THIS B/C NINJA DIDN'T ACTUALLY CODE A SAVE SYSTEM
-            //And the inspector values get destroyed
-            world1Push.m_World = GameObject.Find("PushWrld");
-            world2Pull.m_World = GameObject.Find("PullWrld");
-        }
-        */
+        
 
     }
+
+    void ClearCheckpoint(SceneLoadNext sceneLoadNext)
+    {
+        CheckpointSystem.pullLastCheckpointPos = null;
+        CheckpointSystem.pushLastCheckpointPos = null;
+
+    }
+
 
 }
