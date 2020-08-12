@@ -9,6 +9,11 @@ public class VideoTransition : MonoBehaviour
     public VideoPlayer videoPlayer;
     private bool transtioned = false;
 
+    private void Start()
+    {
+        videoPlayer = GetComponent<VideoPlayer>();
+    }
+
     // Update is called once per frame
     void Update()
     {

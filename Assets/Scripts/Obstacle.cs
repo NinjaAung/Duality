@@ -29,7 +29,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
     private Animator animator;
     private AnimationClip m_FallingClip;
     private float m_animationDuration;
-
+    private bool playingAnim = false;
 
     private GameObject DetachableObject;
 
@@ -86,11 +86,11 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
             if (isBox) 
             {
-                Debug.Log("This is a box");
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                //Debug.Log("This is a box");
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX ;
             } else
             {
-               Debug.Log("This is not a box") ;
+               //Debug.Log("This is not a box") ;
             }
 
             joint = GetComponent<Joint2D>();
@@ -117,12 +117,13 @@ public class Obstacle : MonoBehaviour, IGrabbable
             joint.enabled = true;
             rb.constraints = RigidbodyConstraints2D.None;
         }
-        else
+        else if(playingAnim == false)
         {
             //Count until the player pulled for _ seconds
             animator.SetBool("isFalling", true);
             //Animate the Tree Fallin
             StartCoroutine(DetachObject(m_animationDuration));
+            playingAnim = true;
             //Detach Object
         }
     }
@@ -146,7 +147,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
         Debug.Log("TestWhenAnimationFinish");
         Vector3 temp = DetachableObject.transform.position;
         Quaternion tempRot = DetachableObject.transform.rotation;
-        Vector3 tempScale = DetachableObject.transform.localScale;
+        Vector3 tempScale = DetachableObject.transform.lossyScale;
 
         //Vector3 temp2 = DetachableObject.transform.localPosition;
 
@@ -169,6 +170,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
         DetachableObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
         ObsCompnent.enabled = true;
+        //animator.enabled = false;
     }
     void GetAnimationDuration()
     {
@@ -189,7 +191,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
     private IEnumerator DetachObject(float animationDuration)
     {
-        yield return new WaitForSeconds(animationDuration + 1);
+        yield return new WaitForSeconds(animationDuration +3f);
         OnFinishedAnimation();
     }
 
