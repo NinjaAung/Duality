@@ -261,8 +261,12 @@ public class Player : MonoBehaviour {
             DisableBothAnim();
             if (m_Obstacle.GetComponent<Obstacle>())
             {
-                m_Obstacle.GetComponent<Obstacle>().Release(this);
+                if (m_Obstacle.GetComponent<Obstacle>().enabled == true)
+                {
+                    m_Obstacle.GetComponent<Obstacle>().Release(this);
+                }
             }
+
             //m_Obstacle.GetComponent<FixedJoint2D>().enabled = false;
             //m_Obstacle.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         }
