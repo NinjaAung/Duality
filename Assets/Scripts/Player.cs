@@ -220,11 +220,13 @@ public class Player : MonoBehaviour {
             }
             else if (objectOnRight == false && horizontal == 1)
             {
+                /*
                 if (m_Obstacle.GetComponent<Obstacle>().GetPullable() == false)
                 {
                     AttachObstacle(false);
                     return;
                 }
+                */
                 //Debug.Log(" Pulling to the right");
                 OnPull();
                 EventSystem.instance.RaiseEvent(new ObjectContact { contact = TypeOfContact.PullingObject });
@@ -340,6 +342,9 @@ public class Player : MonoBehaviour {
         if (horizontalMove == 0)
         {
             controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            //Bad code
+            //If the player is not moving it won't trigger the NonNativeResponse
+            GameManager.Instance.m_NonNativeResponse = false;
         }
         else
         {

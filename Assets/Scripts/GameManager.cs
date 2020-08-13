@@ -76,6 +76,8 @@ public class GameManager: MonoBehaviour
     public Player playerPush;
     public Player playerPull;
 
+    public bool m_NonNativeResponse;
+
 
     #region Singleton
     public static GameManager Instance //Ensures that this is the only instance in the class
@@ -147,6 +149,12 @@ public class GameManager: MonoBehaviour
 
     private void Update()
     {
+        //If the Player is uses the correct abilitiy it will reset.
+        //The Increase rate will stay the same
+        if (m_NonNativeResponse == false)
+        {
+            m_IncreaseRate = 0.01f;
+        }
 
         //Judgement Variable Update
         if (cooldownPassed)
@@ -184,19 +192,29 @@ public class GameManager: MonoBehaviour
         {
             if(currentWorld == Worlds.Push)
             {
+                m_NonNativeResponse = true;
                 m_IncreaseRate += 0.02f;
                 EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
+            }
+            else
+            {
+                m_NonNativeResponse = false;
             }
         }
         if (contact.contact == TypeOfContact.PushingObject)
         {
             if(currentWorld == Worlds.Pull)
             {
+                m_NonNativeResponse = true;
                 m_IncreaseRate += 0.02f;
                 EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
 
+            }
+            else
+            {
+                m_NonNativeResponse = false;
             }
         }
 

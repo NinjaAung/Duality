@@ -21,8 +21,8 @@ public class Obstacle : MonoBehaviour, IGrabbable
         Animated
     }
 
-    [SerializeField] private bool m_Pushable;
-    [SerializeField] private bool m_Pullable;
+    //[SerializeField] private bool m_Pushable;
+    //[SerializeField] private bool m_Pullable;
     [SerializeField] private bool isBox;
 
 
@@ -39,6 +39,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
 
     private Joint2D joint;
 
+    /*
     public bool GetPushable()
     {
         return m_Pushable;
@@ -47,7 +48,7 @@ public class Obstacle : MonoBehaviour, IGrabbable
     {
         return m_Pullable;
     }
-
+    */
     public void Awake()
     {
 
