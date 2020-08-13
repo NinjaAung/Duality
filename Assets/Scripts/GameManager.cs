@@ -53,6 +53,9 @@ public class GameManager: MonoBehaviour
     public World world1Push;
     public World world2Pull;
 
+    public GameObject pushSky;
+    public GameObject pullSky;
+
     public Worlds currentWorld;
     
     [Range(1,100), Tooltip("In terms of seconds")]
@@ -320,7 +323,9 @@ public class GameManager: MonoBehaviour
     private void UpdatingWorldObjects(bool state)
     {
         world1Push.SetWorldStatus(state);
+        pushSky.SetActive(state);
         bool opposite = !state;
+        pullSky.SetActive(opposite);
         world2Pull.SetWorldStatus(opposite);
     }
 
