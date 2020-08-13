@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 
     private GameManager gm;
 
-
+    private bool hasControl = true;
 
 
     [Header("Grab & Pull"), Space(2)]
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-
+        hasControl = true;
         //gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         //gm = GameManager.Instance;
         if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
@@ -326,6 +326,11 @@ public class Player : MonoBehaviour {
         horizontalMove = _horiz.movInput * runSpeed;
     }
 
+    public void SetHasControl(bool target)
+    {
+        hasControl = target;
+    }
+
 
 	void FixedUpdate ()
 	{
@@ -339,16 +344,20 @@ public class Player : MonoBehaviour {
             controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         }
         jump = false;
-        if (horizontalMove == 0)
+        if (hasControl)
         {
-            controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            //Bad code
-            //If the player is not moving it won't trigger the NonNativeResponse
-            GameManager.Instance.m_NonNativeResponse = false;
+            if (horizontalMove == 0)
+            {
+                controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                //Bad code
+                //If the player is not moving it won't trigger the NonNativeResponse
+                GameManager.Instance.m_NonNativeResponse = false;
+            }
+            else
+            {
+                controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
         }
-        else
-        {
-            controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+
     }
 }

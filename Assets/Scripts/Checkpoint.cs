@@ -1,9 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualityES;
+
+
+public class EndpointChecked : DualityES.Event
+{
+}
 
 public class Checkpoint : MonoBehaviour
 {
+
+    public enum CheckpointType
+    {
+        Regular,
+        Endpoint
+    }
+
+
+    [SerializeField] private CheckpointType m_CheckpointType = CheckpointType.Regular;
+    private float specialDuration;
+
     [Header("Particle")]
     [SerializeField] private ParticleSystem particleSystem;
     [Header("Sound")]
@@ -27,9 +44,15 @@ public class Checkpoint : MonoBehaviour
             }
         }
     }
+
+    void EndpointEffect()
+    {
+        //People can add thier own spefical vfx if they want
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player") && other.GetComponent<Player>()){
-            Debug.Log("Enabiling Effect");
+
             isChecked = true;
             particleSystem.Play();
             //gm.lastCheckpointPos = transform.position;
@@ -46,6 +69,31 @@ public class Checkpoint : MonoBehaviour
             {
                 CheckpointSystem.pushLastCheckpointPos = other.gameObject.transform.position;
             }
+
+            if (m_CheckpointType == CheckpointType.Endpoint)
+            {
+                EventSystem.instance.RaiseEvent(new EndpointChecked { });
+                if(CheckpointSystem.finishedPullEndpoint == false)
+                {
+                    if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
+                    {
+                        CheckpointSystem.finishedPullEndpoint = true;
+                    }
+
+                }else if(CheckpointSystem.finishedPushEndpoint == false)
+                {
+                    if (transform.root == GameManager.Instance.world1Push.m_World.transform)
+                    {
+                        CheckpointSystem.finishedPushEndpoint = true;
+                    }
+                }
+                
+
+
+                EndpointEffect();
+
+            }
+
         }
     } 
 }

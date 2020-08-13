@@ -49,7 +49,8 @@ public class AudioManager : MonoBehaviour
 
     void OnJudgment(Judgment judgmentData)
     {
-        judgmentVolume = judgmentData.JudgmentScore;
+        judgmentVolume = MappingFunction(judgmentData.JudgmentScore, 0, 70, 0, 1);
+
     }
 
 
@@ -98,4 +99,14 @@ public class AudioManager : MonoBehaviour
         AmbienceManager.RemoveSequence(Heartbeat);
         AmbienceManager.DeactivateEvent("Heartbeat");
     }
+
+
+    float MappingFunction(float orignal_value, float aMin, float aMax, float bMin, float bMax)
+    {
+        float normal = Mathf.InverseLerp(aMin, aMax, orignal_value);
+        float bValue = Mathf.Lerp(bMin, bMax, normal);
+
+        return bValue;
+    }
+
 }

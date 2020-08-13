@@ -16,12 +16,14 @@ public class CamShake : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.instance.AddListener<OnNonNativeEvent>(CheckifNonNative);
+        EventSystem.instance.AddListener<EndpointChecked>(OnEndpoint);
+
 
     }
     void OnDisable()
     {
-        EventSystem.instance.AddListener<OnNonNativeEvent>(CheckifNonNative);
-
+        EventSystem.instance.RemoveListener<OnNonNativeEvent>(CheckifNonNative);
+        EventSystem.instance.RemoveListener<EndpointChecked>(OnEndpoint);
     }
 
     private void Start()
@@ -34,6 +36,11 @@ public class CamShake : MonoBehaviour
     void CheckifNonNative(OnNonNativeEvent contact)
     {
         Shake(1f, 0.5f);
+    }
+
+    void OnEndpoint(EndpointChecked endpoint)
+    {
+        Shake(1f, 2f);
     }
 
     public void Shake(float intensity, float timer)

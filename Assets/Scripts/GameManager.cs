@@ -78,6 +78,8 @@ public class GameManager: MonoBehaviour
 
     public bool m_NonNativeResponse;
 
+    private bool hasNecklace = false;
+
 
     #region Singleton
     public static GameManager Instance //Ensures that this is the only instance in the class
@@ -265,7 +267,8 @@ public class GameManager: MonoBehaviour
     //Depending on which world the current player is in the world changes accordingly
     private void OnWorldSwitch(WorldSwitchButton button)
     {
-        if (cooldownPassed)
+        if (cooldownPassed&&
+            hasNecklace)
         {
             m_IncreaseRate = 0.1f;
             cooldownPassed = false;
@@ -350,7 +353,14 @@ public class GameManager: MonoBehaviour
     {
         CheckpointSystem.pullLastCheckpointPos = null;
         CheckpointSystem.pushLastCheckpointPos = null;
+        CheckpointSystem.finishedPullEndpoint = false;
+        CheckpointSystem.finishedPushEndpoint = false;
+    }
 
+
+    public void GotNecklace()
+    {
+        hasNecklace = true;
     }
 
 

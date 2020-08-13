@@ -9,7 +9,13 @@ public class Necklace : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.GetComponent<Player>())
         {
-            EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
+            //EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
+            //Now prompt UI
+
+            //Enable WS ability
+            GameManager.Instance.GotNecklace();
+            //Destroy GameObject
+            Destroy(this.gameObject);
 
         }
     }

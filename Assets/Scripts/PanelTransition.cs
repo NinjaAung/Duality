@@ -18,7 +18,6 @@ public class PanelTransition : MonoBehaviour
 
 
     private bool m_pressedOnce = false;
-    private bool m_pressedTwice = false;
 
     private void Start()
     {
@@ -28,6 +27,7 @@ public class PanelTransition : MonoBehaviour
             Debug.LogError("Missing m_ContinueText");
             return;
         }
+        FadeInText(-1f);
 
     }
 
@@ -44,17 +44,13 @@ public class PanelTransition : MonoBehaviour
 
     void OnSpacePressed()
     {
-        if (m_pressedOnce == true && m_pressedTwice == false)
+        if (m_pressedOnce == false )
         {
             FadeOutText(-1f);
-            m_pressedOnce = true;
-            m_pressedTwice = true;
-        }
-        else if (m_pressedOnce == false)
-        {
-            FadeInText(-1f);
+
             m_pressedOnce = true;
         }
+
 
     }
 

@@ -8,5 +8,9 @@ public class CheckpointSystem
 
     public static Vector3? pushLastCheckpointPos = null;
 
+    public static bool finishedPullEndpoint = false;
+    public static bool finishedPushEndpoint = false;
+
+
 
 }

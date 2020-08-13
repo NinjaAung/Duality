@@ -7,6 +7,10 @@ public class EndPoint: MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EventSystem.instance.RaiseEvent(new ResetGameScene { });
+        if (CheckpointSystem.finishedPullEndpoint && CheckpointSystem.finishedPushEndpoint)
+        {
+            EventSystem.instance.RaiseEvent(new ResetGameScene { });
+
+        }
     }
 }
