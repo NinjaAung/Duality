@@ -146,9 +146,18 @@ public class Obstacle : MonoBehaviour, IGrabbable
     public void OnFinishedAnimation()//Attach to the last keyframe Event (Animation Window)
     {
         Debug.Log("TestWhenAnimationFinish");
-        Vector3 temp = DetachableObject.transform.position;
-        Quaternion tempRot = DetachableObject.transform.rotation;
-        Vector3 tempScale = DetachableObject.transform.lossyScale;
+        Vector3 temp = DetachableObject.transform.localPosition;
+        Quaternion tempRot = DetachableObject.transform.localRotation;
+        Vector3 tempScale = DetachableObject.transform.localScale;
+
+        GameObject newParent = new GameObject();
+
+        newParent.transform.parent = gameObject.transform.parent;
+
+        newParent.transform.localPosition = gameObject.transform.localPosition;
+        newParent.transform.localRotation = gameObject.transform.localRotation;
+        newParent.transform.localScale = gameObject.transform.localScale;
+
 
         //Vector3 temp2 = DetachableObject.transform.localPosition;
 
@@ -159,13 +168,16 @@ public class Obstacle : MonoBehaviour, IGrabbable
         animator.Rebind();
         animator.playbackTime = playbackTime;
 
-        DetachableObject.transform.parent = gameObject.transform.parent;
+        DetachableObject.transform.parent = newParent.transform;
 
-        DetachableObject.transform.position = temp;
-        DetachableObject.transform.rotation= tempRot;
+        
+        DetachableObject.transform.localPosition = temp;
+        DetachableObject.transform.localRotation= tempRot;
+
         DetachableObject.transform.localScale = tempScale;
         //DetachableObject.transform.position.z = 14f;
-
+        
+        
         DetachableObject.tag = "ObstacleMovable";
         var ObsCompnent = DetachableObject.GetComponent<Obstacle>();
         DetachableObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
