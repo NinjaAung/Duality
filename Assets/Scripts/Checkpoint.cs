@@ -72,19 +72,23 @@ public class Checkpoint : MonoBehaviour
 
             if (m_CheckpointType == CheckpointType.Endpoint)
             {
-                EventSystem.instance.RaiseEvent(new EndpointChecked { });
                 if(CheckpointSystem.finishedPullEndpoint == false)
                 {
                     if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
                     {
                         CheckpointSystem.finishedPullEndpoint = true;
+                        EventSystem.instance.RaiseEvent(new EndpointChecked { });
+
                     }
 
-                }else if(CheckpointSystem.finishedPushEndpoint == false)
+                }
+                if (CheckpointSystem.finishedPushEndpoint == false)
                 {
                     if (transform.root == GameManager.Instance.world1Push.m_World.transform)
                     {
                         CheckpointSystem.finishedPushEndpoint = true;
+                        EventSystem.instance.RaiseEvent(new EndpointChecked { });
+
                     }
                 }
                 
