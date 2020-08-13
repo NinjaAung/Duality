@@ -66,7 +66,11 @@ public class GameManager: MonoBehaviour
     [Range(0,100)]
     public float m_Judgement;
     [Range(1f,10f),SerializeField]
-    private float m_IncreaseRate = 0.01f;
+    private float m_IncreaseRate = 0.1f;
+    [Range(1f,10f),SerializeField]
+    private float m_DefualtRate = 0.4f;
+
+
     [Range(70, 100), SerializeField]
     private float m_JudgementOverloadValue = 70.0f;
 
@@ -78,7 +82,6 @@ public class GameManager: MonoBehaviour
 
     public bool m_NonNativeResponse;
 
-    private bool hasNecklace = false;
 
 
     #region Singleton
@@ -155,7 +158,7 @@ public class GameManager: MonoBehaviour
         //The Increase rate will stay the same
         if (m_NonNativeResponse == false)
         {
-            m_IncreaseRate = 0.01f;
+            m_IncreaseRate = m_DefualtRate;
         }
 
         //Judgement Variable Update
@@ -195,7 +198,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Push)
             {
                 m_NonNativeResponse = true;
-                m_IncreaseRate += 0.02f;
+                m_IncreaseRate += 0.1f;
                 EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
             }
@@ -209,7 +212,7 @@ public class GameManager: MonoBehaviour
             if(currentWorld == Worlds.Pull)
             {
                 m_NonNativeResponse = true;
-                m_IncreaseRate += 0.02f;
+                m_IncreaseRate += 0.1f;
                 EventSystem.instance.RaiseEvent(new OnNonNativeEvent { });
                 Debug.Log("World Response");
 
@@ -255,7 +258,7 @@ public class GameManager: MonoBehaviour
             }
             else
             {
-                m_IncreaseRate = 0.01f;
+                m_IncreaseRate = m_DefualtRate;
                 cooldownPassed = true;
                 currTimer = 0;
             }
@@ -268,9 +271,9 @@ public class GameManager: MonoBehaviour
     private void OnWorldSwitch(WorldSwitchButton button)
     {
         if (cooldownPassed&&
-            hasNecklace)
+            CheckpointSystem.hasNecklace)
         {
-            m_IncreaseRate = 0.1f;
+            m_IncreaseRate = m_DefualtRate;
             cooldownPassed = false;
             tempOrginalValue = m_Judgement;
             switch (currentWorld)
@@ -360,7 +363,7 @@ public class GameManager: MonoBehaviour
 
     public void GotNecklace()
     {
-        hasNecklace = true;
+        CheckpointSystem.hasNecklace = true;
     }
 
 
