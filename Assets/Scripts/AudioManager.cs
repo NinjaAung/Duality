@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
 
     void OnJudgment(Judgment judgmentData)
     {
-        judgmentVolume = MappingFunction(judgmentData.JudgmentScore, 0, 70, 0, 1);
+        judgmentVolume = MappingFunction(judgmentData.JudgmentScore, 0, 50, 0, 1);
 
     }
 

@@ -34,7 +34,7 @@ public class PostProccesingEffects : MonoBehaviour
     void OnJudgment(Judgment judgmentData)
     {
         //Getting realtime Judgment Value
-        score = MappingFunction(judgmentData.JudgmentScore, 0, 70, 0, 2);
+        score = MappingFunction(judgmentData.JudgmentScore, 0, 50, 0, 2);
     }
 
     // Start is called before the first frame update
