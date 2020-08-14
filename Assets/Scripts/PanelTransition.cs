@@ -27,7 +27,7 @@ public class PanelTransition : MonoBehaviour
             Debug.LogError("Missing m_ContinueText");
             return;
         }
-        FadeInText(-1f);
+        FadeInText(3f);
 
     }
 

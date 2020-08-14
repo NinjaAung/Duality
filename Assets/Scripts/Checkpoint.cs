@@ -26,6 +26,7 @@ public class Checkpoint : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioSource audioSrc;
     bool isChecked = false;
+    private float played_sound = 0;
 
 
     void Start()
@@ -52,14 +53,15 @@ public class Checkpoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player") && other.GetComponent<Player>()){
-
             isChecked = true;
             particleSystem.Play();
             //gm.lastCheckpointPos = transform.position;
-            if (audioSrc.isPlaying) {
+            if (audioSrc.isPlaying || played_sound > 0) {
                 return;
+            } else {
+                audioSrc.Play();
+                played_sound++;
             }
-            audioSrc.Play();
             if (transform.root == GameManager.Instance.world2Pull.m_World.transform)
             {
                 CheckpointSystem.pullLastCheckpointPos = other.gameObject.transform.position;
