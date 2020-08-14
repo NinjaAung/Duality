@@ -64,6 +64,7 @@ public class Scenemanager : MonoBehaviour
     public void MainMenuScene(ResetGameScene reset)
     {
         SceneManager.LoadScene(1);
+        CheckpointSystem.hasNecklace = false;
     }
 
 
