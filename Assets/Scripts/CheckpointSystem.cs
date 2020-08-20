@@ -11,7 +11,7 @@ public class CheckpointSystem
     public static bool finishedPullEndpoint = false;
     public static bool finishedPushEndpoint = false;
 
-    public static bool hasNecklace = true;
+    public static bool hasNecklace = false;
 
 
 

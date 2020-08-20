@@ -33,6 +33,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        if(endCanvas== null)
+        {
+            return;
+        }
         endCanvas.enabled = false;
     }
 

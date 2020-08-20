@@ -62,7 +62,7 @@ public class GameManager: MonoBehaviour
     public float m_WorldSwitchCooldownTimer;
 
     private float currTimer;
-    public  bool cooldownPassed = true;
+    public bool cooldownPassed = true;
 
     #endregion
 
@@ -140,7 +140,10 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.AddListener<SceneLoadNext>(ClearCheckpoint);
 
     }
-
+    private void Start()
+    {
+        cooldownPassed = true;
+    }
     private void OnDisable()
     {
         EventSystem.instance.RemoveListener<WorldSwitchButton>(OnWorldSwitch);

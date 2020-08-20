@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2375,6 +2375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActiveCamera: {fileID: 0}
+  endScreenFOV: 70
+  endScreenY: 0.891
 --- !u!1 &179470527
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,7 +4132,7 @@ MonoBehaviour:
   cooldownPassed: 0
   m_Judgement: 0
   m_IncreaseRate: 0.01
-  m_DefualtRate: 1
+  m_DefualtRate: 0.01
   m_JudgementOverloadValue: 70
   pause: 0
   playerPush: {fileID: 1142905582}
@@ -5600,7 +5602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b7fab31fdc67a40a731ca857f5df32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 200
+  m_JumpForce: 175
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 0
@@ -15840,8 +15842,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940686904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.43300152, y: 1.06, z: 9.08}
-  m_LocalScale: {x: 0.7657738, y: 0.5648577, z: 0.5648577}
+  m_LocalPosition: {x: -0.6, y: 13.3, z: 9.08}
+  m_LocalScale: {x: 6.6858134, y: 4.8587494, z: 0.5648577}
   m_Children:
   - {fileID: 493901317}
   m_Father: {fileID: 576441872}
@@ -20781,7 +20783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b7fab31fdc67a40a731ca857f5df32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 500
+  m_JumpForce: 175
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 0
@@ -25288,8 +25290,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 5814998
-  m_fontColor: {r: 0.8396226, g: 0.72780156, b: 0.34456214, a: 0}
+    rgba: 4284005078
+  m_fontColor: {r: 0.8396226, g: 0.72780156, b: 0.34456214, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -25307,13 +25309,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 98.4
+  m_fontSize: 80.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 150
-  m_fontStyle: 19
+  m_fontStyle: 18
   m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -25393,10 +25395,10 @@ RectTransform:
   m_Father: {fileID: 526256990}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.16034538, y: 0.5}
-  m_AnchorMax: {x: 0.8275182, y: 1}
-  m_AnchoredPosition: {x: 3, y: 5}
-  m_SizeDelta: {x: -10.897705, y: -15.913925}
+  m_AnchorMin: {x: 0.16034538, y: 0.62857145}
+  m_AnchorMax: {x: 0.8255102, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: 0.9000015}
+  m_SizeDelta: {x: 1, y: -1.8935089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1443969622
 GameObject:
@@ -32063,6 +32065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActiveCamera: {fileID: 0}
+  endScreenFOV: 0
+  endScreenY: 0
 --- !u!1 &1863917763
 GameObject:
   m_ObjectHideFlags: 0
