@@ -70,7 +70,7 @@ public class GameManager: MonoBehaviour
     public float m_Judgement;
     [Range(1f,10f),SerializeField]
     private float m_IncreaseRate = 0.1f;
-    [Range(1f,10f),SerializeField]
+    [Range(0f,1f),SerializeField]
     private float m_DefualtRate = 0.4f;
 
 
