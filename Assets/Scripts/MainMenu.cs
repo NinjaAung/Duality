@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnQuit() {
         Debug.Log("'QUIT' Pressed");
-        //Application.Quit();
+        Application.Quit();
         //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

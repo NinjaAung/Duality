@@ -43,9 +43,9 @@ Material:
     - Vector1_D412CFB2: 0.4
     - _EnableExternalAlpha: 0
     m_Colors:
-    - ColorBloom: {r: 0.8962264, g: 0.7779225, b: 0.62144, a: 0.3882353}
+    - ColorBloom: {r: 1, g: 1, b: 1, a: 0.3882353}
     - Color_926009DC: {r: 0, g: 1, b: 0.5121491, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SourcePosition: {r: -1.52, g: -1.3800001, b: 13, a: 0}
+    - _SourcePosition: {r: 55.64, g: -0.25, b: 13, a: 0}
