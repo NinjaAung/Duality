@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
                 transform.position = CheckpointSystem.pullLastCheckpointPos.Value;
             }
         }
-        else
+        if(transform.root == GameManager.Instance.world1Push.m_World.transform)
         {
             if (CheckpointSystem.pushLastCheckpointPos != null)
             {
@@ -288,7 +288,9 @@ public class Player : MonoBehaviour {
     {
         //not necessary to use _jump in function, only here to use function in event system
         jump = true;
-        animator.SetBool("isJumping", jump);
+        //Debug.Log("Pressed Jump");
+        //StartCoroutine(JumpingAnimationSyncing());
+        animator.SetBool("isJumping", true);
     }
 
 	public void OnLanding() 
@@ -360,5 +362,18 @@ public class Player : MonoBehaviour {
             }
         }
 
+    }
+
+    public IEnumerator JumpingAnimationSyncing()
+    {
+        Debug.Log("Start of Courtine");
+        
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.jumpingAfter"))
+        {
+            Debug.Log("InWhile loop");
+            yield return null;
+        }
+        Debug.Log("Finish Courtine");
+        jump = true;
     }
 }

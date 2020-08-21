@@ -62,7 +62,7 @@ public class GameManager: MonoBehaviour
     public float m_WorldSwitchCooldownTimer;
 
     private float currTimer;
-    public  bool cooldownPassed = true;
+    public bool cooldownPassed = true;
 
     #endregion
 
@@ -70,7 +70,7 @@ public class GameManager: MonoBehaviour
     public float m_Judgement;
     [Range(1f,10f),SerializeField]
     private float m_IncreaseRate = 0.1f;
-    [Range(1f,10f),SerializeField]
+    [Range(0f,1f),SerializeField]
     private float m_DefualtRate = 0.4f;
 
 
@@ -140,7 +140,10 @@ public class GameManager: MonoBehaviour
         EventSystem.instance.AddListener<SceneLoadNext>(ClearCheckpoint);
 
     }
-
+    private void Start()
+    {
+        cooldownPassed = true;
+    }
     private void OnDisable()
     {
         EventSystem.instance.RemoveListener<WorldSwitchButton>(OnWorldSwitch);
