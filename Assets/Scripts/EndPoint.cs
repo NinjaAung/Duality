@@ -14,7 +14,6 @@ public class EndPoint: MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTrigger Works");
         EventSystem.instance.RaiseEvent(new EndSceneEvent { m_animationDuration = 10f });//The Visual Effect
 
         if (CheckpointSystem.finishedPullEndpoint && CheckpointSystem.finishedPushEndpoint)
