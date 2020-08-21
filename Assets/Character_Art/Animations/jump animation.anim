@@ -5674,11 +5674,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-<<<<<<< HEAD
     path: body bone/back leg bone/back knee bone/back foot bone
-=======
-    path: body bone/front leg bone/front knee bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5688,11 +5684,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-<<<<<<< HEAD
     path: body bone/back leg bone/back knee bone/back foot bone
-=======
-    path: body bone/front leg bone/front knee bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5702,11 +5694,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-<<<<<<< HEAD
     path: body bone/back leg bone/back knee bone/back foot bone
-=======
-    path: body bone/front leg bone/front knee bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6106,11 +6094,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-<<<<<<< HEAD
     path: body bone/front leg bone/front knee bone/front foot bone
-=======
-    path: body bone/mid body bone/neck bone/neck bone 2/head bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6120,11 +6104,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-<<<<<<< HEAD
     path: body bone/front leg bone/front knee bone/front foot bone
-=======
-    path: body bone/mid body bone/neck bone/neck bone 2/head bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6134,11 +6114,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-<<<<<<< HEAD
     path: body bone/front leg bone/front knee bone/front foot bone
-=======
-    path: body bone/mid body bone/neck bone/neck bone 2/head bone
->>>>>>> 750223c7f5612741baf4f1134c1dcb28a2fd39d3
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
