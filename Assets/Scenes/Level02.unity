@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4093,6 +4093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8967dbc4ec649429ae7c8b51b71c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSrc: {fileID: 1142905581}
+  m_WorldSwitch: {fileID: 8300000, guid: 213817126d0d4814fab4a26ca54b435f, type: 3}
 --- !u!4 &274673713
 Transform:
   m_ObjectHideFlags: 0
@@ -4132,7 +4134,7 @@ MonoBehaviour:
   cooldownPassed: 0
   m_Judgement: 0
   m_IncreaseRate: 0.01
-  m_DefualtRate: 0.01
+  m_DefualtRate: 0.07
   m_JudgementOverloadValue: 70
   pause: 0
   playerPush: {fileID: 1142905582}
@@ -8553,7 +8555,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.2230365, y: -0.42865536}
+  m_Offset: {x: -1.8002634, y: -0.42865536}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8564,7 +8566,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4192047, y: 0.6596672}
+  m_Size: {x: 0.14726913, y: 0.6596672}
   m_EdgeRadius: 0
 --- !u!1 &522753680
 GameObject:
@@ -14752,12 +14754,12 @@ PrefabInstance:
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.018
       objectReference: {fileID: 0}
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.018
       objectReference: {fileID: 0}
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
@@ -14807,12 +14809,12 @@ PrefabInstance:
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6675148926590483082, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6675148926590483083, guid: b63d8c5bd271a437c93752090782a4d9,
         type: 3}
@@ -25309,7 +25311,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80.95
+  m_fontSize: 150
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25397,7 +25399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16034538, y: 0.62857145}
   m_AnchorMax: {x: 0.8255102, y: 1}
-  m_AnchoredPosition: {x: 0.5, y: 0.9000015}
+  m_AnchoredPosition: {x: 0.5, y: 0.8999939}
   m_SizeDelta: {x: 1, y: -1.8935089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1443969622

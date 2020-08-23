@@ -373,6 +373,10 @@ public class GameManager: MonoBehaviour
     {
         CheckpointSystem.hasNecklace = true;
     }
-
+    public void OnEndSceneJudgment(EndSceneEvent endSceneEvent)
+    {
+        m_Judgement = 0;
+        cooldownPassed = false;
+    }
 
 }

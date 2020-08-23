@@ -84,7 +84,7 @@ public class Player : MonoBehaviour {
         EventSystem.instance.AddListener<JumpButton>(OnJump);
         EventSystem.instance.AddListener<GrabButton>(OnGrab);
         EventSystem.instance.AddListener<MovementInput>(GetHorizontal);
-
+        EventSystem.instance.AddListener<EndSceneEvent>(OnEndSceneEvent);
     }
 
 
@@ -103,9 +103,11 @@ public class Player : MonoBehaviour {
        EventSystem.instance.RemoveListener<JumpButton>(OnJump);
        EventSystem.instance.RemoveListener<GrabButton>(OnGrab);
        EventSystem.instance.RemoveListener<MovementInput>(GetHorizontal);
+        EventSystem.instance.RemoveListener<EndSceneEvent>(OnEndSceneEvent);
+
     }
 
-	void Update () {
+    void Update () {
 
         bool grabbedObject = false;
 
@@ -375,5 +377,10 @@ public class Player : MonoBehaviour {
         }
         Debug.Log("Finish Courtine");
         jump = true;
+    }
+
+    public void OnEndSceneEvent(EndSceneEvent endSceneEvent)
+    {
+        SetHasControl(false);
     }
 }

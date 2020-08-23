@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualityES;
 
+
 #region Input Events
 public class PauseGame : DualityES.Event
 {
@@ -28,8 +29,10 @@ public class MovementInput : DualityES.Event
 
 public class InputManager : MonoBehaviour
 {
+    public AudioSource audioSrc;
 
     protected static InputManager _instance;
+    [SerializeField] private AudioClip m_WorldSwitch;
     //bool checkRestartButton = false;
 
     public static InputManager Instance
@@ -70,6 +73,8 @@ public class InputManager : MonoBehaviour
         if(Input.GetButtonDown("World Switch"))
         {
             EventSystem.instance.RaiseEvent(new WorldSwitchButton { });
+            audioSrc.PlayOneShot(m_WorldSwitch, 0.5f);
+            
         }
 
         if (Input.GetButtonDown("Jump"))
