@@ -48,4 +48,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SourcePosition: {r: 77.67915, g: -1.0723276, b: 13, a: 0}
+    - _SourcePosition: {r: 76.090126, g: -1.0723276, b: 13, a: 0}
